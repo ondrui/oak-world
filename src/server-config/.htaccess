@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+  # RewriteEngine On
+  # RewriteBase /vue-app
+  # RewriteRule ^index\.html$ - [L]
+  # RewriteCond %{REQUEST_FILENAME} !-f
+  # RewriteCond %{REQUEST_FILENAME} !-d
+  # RewriteRule . /vue-app/index.html [L]
+  FallbackResource /vue-app/index.html
+</IfModule>

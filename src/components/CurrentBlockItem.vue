@@ -1,0 +1,93 @@
+<template>
+  <div class="climate-index">
+    <div class="block-icon">
+      <BaseIcon
+        nameIcon="rect-background"
+        pick="common"
+        class="background"
+        width="40"
+      />
+      <BaseIcon
+        :style="windDirection(dataValue, getConstantLocale)"
+        :nameIcon="dataValue.icon"
+        pick="common"
+        class="icon"
+        width="14"
+      />
+    </div>
+    <div class="descr">
+      <div class="title">
+        {{ dataValue.title }}
+      </div>
+      <div class="value">
+        {{ dataValue.value }}
+        <span v-if="dataValue.wind_dir">{{ dataValue.wind_dir[1] }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+import { windDirection } from "@/constants/functions";
+
+export default {
+  props: { dataValue: Object },
+  computed: {
+    ...mapGetters(["getConstantLocale"]),
+  },
+  methods: {
+    /**
+     * Возвращает команду поворота иконки ветра в соответствие с направлением ветра.
+     */
+    windDirection,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.climate-index {
+  display: flex;
+}
+.descr {
+  display: flex;
+  flex-direction: column;
+  padding-left: 6px;
+  justify-content: center;
+  row-gap: 2px;
+  white-space: nowrap;
+
+  & .title {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #9c9c9c;
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  & .value {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+
+    & span {
+      display: inline-block;
+      text-transform: uppercase;
+    }
+  }
+}
+.block-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .icon {
+    position: absolute;
+  }
+}
+</style>

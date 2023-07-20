@@ -1,0 +1,364 @@
+{
+  "topCities": [
+    {
+      "temp": "+6°",
+      "name_loc": "Երևան",
+      "name_ru": "Гюмри",
+      "name_en": "Gyumri"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Գյումրի",
+      "name_ru": "Ереван",
+      "name_en": "Yerevan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Վանաձոր",
+      "name_ru": "Ванадзор",
+      "name_en": "Vanadzor"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Աբովյան",
+      "name_ru": "Абовян",
+      "name_en": "Abovyan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Էջմիածին",
+      "name_ru": "Эчмиацин",
+      "name_en": "Echmiatsin"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Հրազդան",
+      "name_ru": "Раздан",
+      "name_en": "Hrazdan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Կապան",
+      "name_ru": "Капан",
+      "name_en": "Kapan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Արմավիր",
+      "name_ru": "Армавир",
+      "name_en": "Armavir"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Չարենցավան",
+      "name_ru": "Чаренцаван",
+      "name_en": "Charentsavan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սևան",
+      "name_ru": "Севан",
+      "name_en": "Sevan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Արտաշատ",
+      "name_ru": "Арташат",
+      "name_en": "Artashat"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Գավառ",
+      "name_ru": "Гавар",
+      "name_en": "Gavar"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Գորիս",
+      "name_ru": "Горис",
+      "name_en": "Goris"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Իջևան",
+      "name_ru": "Иджеван",
+      "name_en": "Ijevan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Արարատ",
+      "name_ru": "Арарат",
+      "name_en": "Ararat"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մասիս",
+      "name_ru": "Масис",
+      "name_en": "Masis"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սպիտակ",
+      "name_ru": "Спитак",
+      "name_en": "Spitak"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Դիլիջան",
+      "name_ru": "Дилижан",
+      "name_en": "Dilijan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Աշտարակ",
+      "name_ru": "Аштарак",
+      "name_en": "Ashtarak"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Արթիկ",
+      "name_ru": "Артик",
+      "name_en": "Artik"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ալավերդի",
+      "name_ru": "Алаверди",
+      "name_en": "Alaverdi"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ստեփանավան",
+      "name_ru": "Степанаван",
+      "name_en": "Stepanavan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սիսիան",
+      "name_ru": "Сисиан",
+      "name_en": "Sisian"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Վարդենիս",
+      "name_ru": "Варденис",
+      "name_en": "Vardenis"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մարտունի",
+      "name_ru": "Мартуни",
+      "name_en": "Martuni"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Վեդի",
+      "name_ru": "Веди",
+      "name_en": "Vedi"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Եղվարդ",
+      "name_ru": "Егвард",
+      "name_en": "Yeghvard"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մեծամոր",
+      "name_ru": "Мецамор",
+      "name_en": "Metsamor"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Բերդ",
+      "name_ru": "Берд",
+      "name_en": "Berd"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Այնթապ",
+      "name_ru": "Айнтап",
+      "name_en": "Ayntap"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սարուխան",
+      "name_ru": "Сарухан",
+      "name_en": "Sarukhan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Եղեգնաձոր",
+      "name_ru": "Ехегнадзор",
+      "name_en": "Yeghegnadzor"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Արարատ",
+      "name_ru": "Арарат",
+      "name_en": "Ararat"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Տաշիր",
+      "name_ru": "Ташир",
+      "name_en": "Tashir"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Նոր Խարբերդ",
+      "name_ru": "Нор Харберд",
+      "name_en": "Nor Kharberd"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Քաջարան",
+      "name_ru": "Каджаран",
+      "name_en": "Kajaran"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Գառնի",
+      "name_ru": "Гарни",
+      "name_en": "Garni"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սարչապետ",
+      "name_ru": "Сарчапет",
+      "name_en": "Sarchapet"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Սարդարապատ",
+      "name_ru": "Сардарапат",
+      "name_en": "Sardarapat"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ապարան",
+      "name_ru": "Апаран",
+      "name_en": "Aparan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մեծավան",
+      "name_ru": "Мецаван",
+      "name_en": "Metsavan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Վայք",
+      "name_ru": "Вайк",
+      "name_en": "Vayk"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մանթաշ",
+      "name_ru": "Манташ",
+      "name_en": "Mantash"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Նոյեմբերյան",
+      "name_ru": "Ноемберян",
+      "name_en": "Noyemberian"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Նալբանդյան",
+      "name_ru": "Налбандян",
+      "name_en": "Nalbandyan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մարալիկ",
+      "name_ru": "Маралик",
+      "name_en": "Maralik"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Թալին",
+      "name_ru": "Талин",
+      "name_en": "Talin"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Կարմիրգյուղ",
+      "name_ru": "Кармиргюх",
+      "name_en": "Karmirgyugh"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ավշար",
+      "name_ru": "Авшар",
+      "name_en": "Avshar"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ոսկետափ",
+      "name_ru": "Воскетап",
+      "name_en": "Vosketap"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ջերմուկ",
+      "name_ru": "Джермук",
+      "name_en": "Jermuk"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մեղրի",
+      "name_ru": "Мегри",
+      "name_en": "Meghri"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Օձուն",
+      "name_ru": "Одзун",
+      "name_en": "Odzun"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մխչյան",
+      "name_ru": "Мхчян",
+      "name_en": "Mkhchyan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Մալիշկա",
+      "name_ru": "Малишка",
+      "name_en": "Malishka"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Ագարակ",
+      "name_ru": "Агарак",
+      "name_en": "Agarak"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Վերին Արտաշատ",
+      "name_ru": "Верин Арташат",
+      "name_en": "Verin Artashat"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Այգավան",
+      "name_ru": "Айгаван",
+      "name_en": "Aygavan"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Գանձակ",
+      "name_ru": "Гандзак",
+      "name_en": "Gandzak"
+    },
+    {
+      "temp": "+6°",
+      "name_loc": "Շահումյան",
+      "name_ru": "Шаумян",
+      "name_en": "Shahumian"
+    }
+  ]
+}

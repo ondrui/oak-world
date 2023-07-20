@@ -1,0 +1,386 @@
+{
+  "am": {
+    "cities": {
+      "title": "Եղանակը $_country բոլոր քաղաքներում՝ 1000+ քաղաք.",
+      "description": "$_country 1000+ քաղաքների ցանկ, որոնց համար մենք ունենք եղանակային տվյալներ բոլոր հիմնական օդերևութաբանական պարամետրերի, ինչպես նաև աստղագիտական ​​պարամետրերի համար.",
+      "keywords": "եղանակ $_countryում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակ, եղանակի կանխատեսում 10 օրվա համար, եղանակն այսօր, եղանակը վաղը"
+    },
+    "main": {
+      "title": "Եղանակ $_country 1000+ քաղաքներքում. Ճշգրիտ ժամային և մանրամասն եղանակի կանխատեսում առաջիկա 10 օրվա համար:",
+      "description": "$_country բոլոր քաղաքների մանրամասն եղանակի կանխատեսումը այսօրվա, վաղվա, երկու շաբաթվա համար։ 3 օրվա ճշգրիտ ժամային կանխատեսում: Աստղագիտական ​​պարամետրեր՝ արևի և լուսնի արևածագը և մայրամուտը:",
+      "keywords": "եղանակ $_countryում, եղանակ, եղանակի տեսություն, ամենժամյա եղանակը, 10 օրվա եղանակի կանխատեսում, եղանակն այսօր, եղանակը վաղը"
+    },
+    "hourly": {
+      "title": "Եղանակը $_cityում՝ ճշգրիտ և մանրամասն ժամային կանխատեսում",
+      "description": "Եղանակի ճշգրիտ ժամային կանխատեսում $_cityում՝ օդերևութաբանական բոլոր պարամետրերով + արևածագն ու մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
+      "keywords": "Եղանակի ժամային տեսություն $_cityում, եղանակ $_countryում, եղանակ, եղանակի կանխատեսում, ամենժամյա եղանակ, եղանակն այսօր, եղանակը վաղը և մյուս օրը"
+    },
+    "day": {
+      "title": "Եղանակը $_cityում $_days օրվա համար. ամենօրյա մանրամասն ճշգրիտ կանխատեսում",
+      "description": "$_days օրվա եղանակի ճշգրիտ կանխատեսում $_cityում օդերևութաբանական բոլոր պարամետրերով + արևածագը և մայրամուտը և լուսինը։ Տեղեկություններ ջերմաստիճանի, ճնշման, խոնավության, քամու արագության, ուղղության և պոռթկումների մասին.",
+      "keywords": "Եղանակ $_cityում $_days օր, Եղանակ $_countryում, Եղանակ, Եղանակի տեսություն, Եղանակ $_days օր, Եղանակ Այսօր, Եղանակ Վաղը"
+    },
+    "sectionOtherCities": "եղանակը $_country քաղաքներում",
+    "asideHistory": "դիտման պատմություն",
+    "viewsSwitcher": ["քարտեզ", "քաղաքներ"],
+    "LinkTitleCardCity": "ավելին",
+    "timeMarker": [
+      ["now", "Հիմա"],
+      ["yesterday", "երեկ"],
+      ["today", "Այսօր"],
+      ["tomorrow", "Վաղը"],
+      ["overmorrow", "վաղը չէ մյուս օրը"],
+      ["morning", "առավոտ"],
+      ["day", "օր"],
+      ["evening", "երեկո"],
+      ["night", "գիշեր"]
+    ],
+    "allCityBtnCaption": "$_length բոլոր $_country բնակավայրերը",
+    "breadcrumbs": {
+      "main": "տուն",
+      "weather": "եղանակ",
+      "cities": "քաղաքների ցանկը"
+    },
+    "currentBlock": {
+      "now": "հիմա",
+      "forecast": "ըստ կանխատեսման",
+      "feelsLike": "Զգացվում է"
+    },
+    "tabsDescr": {
+      "main": "տուն",
+      "hourly": "ժամային կանխատեսում",
+      "day": "եղանակի կանխատեսում $_length օրվա համար"
+    },
+    "detailsSegmentTitle": "եղանակը $_city - մանրամասն կանխատեսում $_length օրվա համար",
+    "climateIndicators": {
+      "temp": "ջերմաստիճանը",
+      "pressure": "ճնշում",
+      "wind": "քամի",
+      "main": "տուն",
+      "windDirSpeed": "քամու ուղղությունը և արագությունը",
+      "windGust_1": "պոռթկումները",
+      "windGust_2": "նախքան",
+      "humidity": " խոնավ.",
+      "precSum": "տեղումներ",
+      "precProb": "Տեղ. հավան.",
+      "uvi": "ՈՒՖԻ",
+      "daytime": "տևողություն",
+      "comfort": "հարմար"
+    },
+    "units": {
+      "time": ["ժամ", "րոպե"],
+      "temp": ["°", "°С"],
+      "pressure": ["մմ Hg."],
+      "speed": ["մ/վրկ"],
+      "percent": "%",
+      "precSum": ["մմ"]
+    },
+    "windDir": {
+      "calm": [-1111, ""],
+      "variable": [-111, ""],
+      "n": [180, "հս"],
+      "ne": [225, "հս/արլք"],
+      "e": [270, "արլք"],
+      "se": [315, "հվ/րլք"],
+      "s": [0, "հվ"],
+      "sw": [45, "հվ/արմտ"],
+      "w": [90, "արմտ"],
+      "nw": [135, "հս/արմտ"]
+    },
+    "daysweek": {
+      "mon": ["երկ", "Երկուշաբթի"],
+      "tue": ["երք", "Երեքշաբթի"],
+      "wed": ["չրք", "չորեքշաբթի"],
+      "thu": ["հնգ", "հինգշաբթի"],
+      "fri": ["ուրբ", "ուրբաթ"],
+      "sat": ["շաբ", "շաբաթ"],
+      "sun": ["կիր", "կիրակի"]
+    },
+    "weekendDays": ["կրկ", "շբթ"],
+    "polar": {
+      "day": "բևեռային օր",
+      "night": "բևեռային գիշեր"
+    },
+    "listAllCities": ["շրջան", "Բոլորը"],
+    "weather_sign": {
+      "cloudy_rain_1": "ամպամած, անձրև",
+      "cloudy_snow_1": "ամպամած, ձյուն",
+      "partly-cloudy_rain_1_hail_1_thunderstorm_1": "մասամբ ամպամած, հնարավոր է անձրև, ամպրոպ, կարկուտ",
+      "cloudy_sleet_1": "ամպամած, տեղումներ",
+      "cloudy": "ամպամած",
+      "partly-cloudy": "մասամբ ամպամած",
+      "clear": "պարզ",
+      "partly-cloudy_rain_1_thunderstorm_1": "մասամբ ամպամած, անձրև, ամպրոպ",
+      "partly-cloudy_rain_1": "մասամբ ամպամած, անձրև",
+      "partly-cloudy_rain_0": "մասամբ ամպամած, թույլ անձրև",
+      "cloudy_rain_0": "ամպամած, թույլ անձրև",
+      "partly-cloudy_snow_0": "մասամբ ամպամած, թույլ ձյուն",
+      "cloudy_snow_0": "ամպամած, թույլ ձյուն",
+      "partly-cloudy_sleet_0": "մասամբ ամպամած, թույլ տեղումներ",
+      "cloudy_sleet_0": "ամպամած, թույլ տեղումներ",
+      "cloudy_snowstorm_1": "ամպամած, բուք",
+      "mainly-clear": "մասամբ ամպամած",
+      "semitransparent": "կիսաթափանցիկ ամպամածություն",
+      "partly-cloudy_snow_1": "մասամբ ամպամած, ձյուն",
+      "partly-cloudy_sleet_1": "մասամբ ամպամած, տեղումներ",
+      "partly-cloudy_rain_0_thunderstorm_1": "մասամբ ամպամած, հնարավոր է թույլ անձրև, ամպրոպ",
+      "cloudy_rain_0_thunderstorm_1": "Հնարավոր է ամպամածություն, թույլ անձրև, ամպրոպ",
+      "mainly-clear_rain_1_thunderstorm_1": "մասամբ ամպամած, ընդհատվող անձրև, ամպրոպ",
+      "mainly-clear_rain_0_thunderstorm_1": "մասամբ ամպամած, թույլ անձրև, հնարավոր է ամպրոպ",
+      "cloudy_rain_1_thunderstorm_1_hail_1": "ամպամած, անձրեւ, ամպրոպ, կարկուտի հավանականություն",
+      "cloudy_rain_1_thunderstorm_1": "ամպամած, անձրև, ամպրոպ",
+      "mainly-clear_rain_0": "մասամբ ամպամած, թույլ անձրև",
+      "mostly-cloudy": "մասամբ ամպամած"
+    }
+  },
+  "ru": {
+    "cities": {
+      "title": "Погода во всех городах $_country: 1000+ городов.",
+      "description": "Список 1000+ городов $_country по которым у нас есть данные о погоде по всем основным метеопараметрам, а также астрономические параметры.",
+      "keywords": "погода в $_country, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
+    },
+    "main": {
+      "title": "Погода по 1000+ городам $_country! Точный почасовой и подробный прогноз погоды на 10 дней вперед.",
+      "description": "Подробный прогноз погоды по всем городам $_country на сегодня завтра, две недели. Точный почасовой прогноз на 3 дня. Астрономические параметры: восходы-заходы солнца и луны. ",
+      "keywords": "погода в $_country, погода, прогноз погоды, погода почасовая, прогноз погоды на 10 дней, погода на сегодня, погода на завтра"
+    },
+    "hourly": {
+      "title": "Погода в $_city - точный и подробный почасовой прогноз",
+      "description": "Точный почасовой прогноз погоды в $_city по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
+      "keywords": "почасовой прогноз погоды в $_city, погода в $_country, погода, прогноз погоды, погода почасовая, погода на сегодня, погода на завтра и послезавтра"
+    },
+    "day": {
+      "title": "Погода в $_city на $_days дней - подробный точный прогноз на каждый день",
+      "description": "Точный прогноз погоды в $_city на $_days дней по всем метеопараметрам + восходы и захода Солнца и Луны. Информация о температуре, давлении, влажности, скорости, направлении и порывах ветра.",
+      "keywords": "погода в $_city на $_days дней, погода в $_country, погода, прогноз погоды, прогноз погоды на $_days дней, погода на сегодня, погода на завтра"
+    },
+    "sectionOtherCities": "погода в городах $_country",
+    "asideHistory": "история просмотров",
+    "viewsSwitcher": ["карта", "города"],
+    "LinkTitleCardCity": "подробнее",
+    "timeMarker": [
+      ["now", "сейчас"],
+      ["yesterday", "вчера"],
+      ["today", "сегодня"],
+      ["tomorrow", "завтра"],
+      ["overmorrow", "послезавтра"],
+      ["morning", "утро"],
+      ["day", "день"],
+      ["evening", "вечер"],
+      ["night", "ночь"]
+    ],
+    "allCityBtnCaption": "Все $_length населенных пункта $_country",
+    "breadcrumbs": {
+      "main": "главная",
+      "weather": "погода",
+      "cities": "список городов"
+    },
+    "currentBlock": {
+      "now": "сейчас в",
+      "forecast": "по прогнозу",
+      "feelsLike": "ощущается"
+    },
+    "tabsDescr": {
+      "main": "главная",
+      "hourly": "почасовой прогноз",
+      "day": "прогноз погоды на $_length дней"
+    },
+    "detailsSegmentTitle": "погода в $_city - подробный прогноз на $_length дней",
+    "climateIndicators": {
+      "temp": "температура",
+      "pressure": "давление",
+      "wind": "ветер",
+      "main": "главная",
+      "windDirSpeed": "направление и скорость ветра",
+      "windGust_1": "порывы ветра",
+      "windGust_2": "до",
+      "humidity": "влажность",
+      "precSum": "кол-во осадков",
+      "precProb": "вер. осадков",
+      "uvi": "УФИ",
+      "daytime": "долгота дня",
+      "comfort": "комфорт"
+    },
+    "units": {
+      "time": ["ч", "мин"],
+      "temp": ["°", "°С"],
+      "pressure": ["мм.рт.ст."],
+      "speed": ["м/с"],
+      "percent": "%",
+      "precSum": ["мм"]
+    },
+    "windDir": {
+      "calm": [-1111, ""],
+      "variable": [-111, ""],
+      "n": [180, "с"],
+      "ne": [225, "св"],
+      "e": [270, "в"],
+      "se": [315, "юв"],
+      "s": [0, "ю"],
+      "sw": [45, "юз"],
+      "w": [90, "з"],
+      "nw": [135, "сз"]
+    },
+    "weekendDays": ["вс", "сб"],
+    "polar": {
+      "day": "полярный день",
+      "night": "полярная ночь"
+    },
+    "listAllCities": ["область", "все"],
+    "weather_sign": {
+      "cloudy_rain_1": "облачно, дождь",
+      "cloudy_snow_1": "облачно, снег",
+      "partly-cloudy_rain_1_hail_1_thunderstorm_1": "переменная облачность, дождь, гроза, возможен град",
+      "cloudy_sleet_1": "облачно, осадки",
+      "cloudy": "облачно",
+      "partly-cloudy": "переменная облачность",
+      "clear": "ясно",
+      "partly-cloudy_rain_1_thunderstorm_1": "переменная облачность, дождь, гроза",
+      "partly-cloudy_rain_1": "переменная облачность, дождь",
+      "partly-cloudy_rain_0": "переменная облачность, небольшой дождь",
+      "cloudy_rain_0": "облачно, небольшой дождь",
+      "partly-cloudy_snow_0": "переменная облачность, небольшой снег",
+      "cloudy_snow_0": "облачно, небольшой снег",
+      "partly-cloudy_sleet_0": "переменная облачность, небольшие осадки",
+      "cloudy_sleet_0": "облачно, небольшие осадки",
+      "cloudy_snowstorm_1": "облачно, метель",
+      "mainly-clear": "малооблачно",
+      "semitransparent": "полупрозрачная облачность",
+      "partly-cloudy_snow_1": "переменная облачность, снег",
+      "partly-cloudy_sleet_1": "переменная облачность, осадки",
+      "partly-cloudy_rain_0_thunderstorm_1": "переменная облачность, небольшой дождь, возможна гроза",
+      "cloudy_rain_0_thunderstorm_1": "облачно, небольшой дождь, возможна гроза",
+      "mainly-clear_rain_1_thunderstorm_1": "малооблачно, кратковременный дождь, гроза",
+      "mainly-clear_rain_0_thunderstorm_1": "малооблачно, небольшой дождь, возможна гроза",
+      "cloudy_rain_1_thunderstorm_1_hail_1": "облачно, дождь, гроза, возможен град",
+      "cloudy_rain_1_thunderstorm_1": "облачно, дождь, гроза",
+      "mainly-clear_rain_0": "малооблачно, небольшой дождь",
+      "mostly-cloudy": "облачно с прояснениями"
+    }
+  },
+  "en": {
+    "cities": {
+      "title": "Weather in all cities of $_country: 1000+ cities.",
+      "description": "List of 1000+ cities in $_country for which we have weather data for all major meteorological parameters, as well as astronomical parameters.",
+      "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+    },
+    "main": {
+      "title": "Weather for 1000+ cities of $_country! Accurate hourly and detailed weather forecast for 10 days ahead.",
+      "description": "Detailed weather forecast for all cities of $_country for today tomorrow, two weeks. Accurate hourly forecast for 3 days. Astronomical parameters: sunrises and sunsets of the sun and moon.",
+      "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+    },
+    "hourly": {
+      "title": "Weather in $_city - accurate and detailed hourly forecast",
+      "description": "Accurate hourly weather forecast in $_city for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+      "keywords": "hourly weather forecast in $_city, weather in $_country, weather, weather forecast, hourly weather, weather for today, weather for tomorrow and the day after tomorrow"
+    },
+    "day": {
+      "title": "Weather in $_city for $_days days - detailed accurate forecast for every day",
+      "description": "Accurate weather forecast in $_city for $_days days for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+      "keywords": "weather in $_city for $_days days, weather in $_country, weather, weather forecast, weather forecast for $_days days, weather for today, weather for tomorrow"
+    },
+    "sectionOtherCities": "weather for cities in $_country",
+    "asideHistory": "browsing history",
+    "viewsSwitcher": ["map", "sity"],
+    "LinkTitleCardCity": "more",
+    "timeMarker": [
+      ["now", "now"],
+      ["yesterday", "yesterday"],
+      ["today", "today"],
+      ["tomorrow", "tomorrow"],
+      ["overmorrow", "overmorrow"],
+      ["morning", "morning"],
+      ["day", "day"],
+      ["evening", "evening"],
+      ["night", "night"]
+    ],
+    "allCityBtnCaption": "All $_length locations in $_country",
+    "breadcrumbs": {
+      "main": "home",
+      "weather": "weather",
+      "cities": "list of cities"
+    },
+    "currentBlock": {
+      "now": "now at",
+      "forecast": "according to the forecast",
+      "feelsLike": "feels like"
+    },
+    "tabsDescr": {
+      "main": "main",
+      "hourly": "hourly",
+      "day": "$_length day forecast"
+    },
+    "detailsSegmentTitle": "weather in $_city - detailed forecast for $_length days",
+    "climateIndicators": {
+      "temp": "temperature",
+      "pressure": "pressure",
+      "wind": "wind",
+      "main": "main",
+      "windDirSpeed": "wind direction and speed",
+      "windGust_1": "wind gust",
+      "windGust_2": "up to",
+      "humidity": "humidity",
+      "precSum": "precipitation",
+      "precProb": "precip chance",
+      "uvi": "UVI",
+      "daytime": "sunrise & sunset",
+      "comfort": "comfort"
+    },
+    "units": {
+      "time": ["h", "m"],
+      "temp": ["°", "°С"],
+      "pressure": ["mmHg"],
+      "speed": ["m/s"],
+      "percent": "%",
+      "precSum": ["mm"]
+    },
+    "windDir": {
+      "calm": [-1111, ""],
+      "variable": [-111, ""],
+      "n": [180, "n"],
+      "ne": [225, "ne"],
+      "e": [270, "e"],
+      "se": [315, "se"],
+      "s": [0, "s"],
+      "sw": [45, "sw"],
+      "w": [90, "w"],
+      "nw": [135, "nw"]
+    },
+    "weekendDays": ["sun", "sat"],
+    "polar": {
+      "day": "polar day",
+      "night": "polar night"
+    },
+    "listAllCities": ["region", "all"],
+    "weather_sign": {
+      "cloudy_rain_1": "cloudy, rain",
+      "cloudy_snow_1": "cloudy, snow",
+      "partly-cloudy_rain_1_hail_1_thunderstorm_1": "partly cloudy, rain, thunderstorm, hail possible",
+      "cloudy_sleet_1": "cloudy, precipitation",
+      "cloudy": "cloudy",
+      "partly-cloudy": "partly cloudy",
+      "clear": "clear",
+      "partly-cloudy_rain_1_thunderstorm_1": "partly cloudy, rain, thunderstorm",
+      "partly-cloudy_rain_1": "partly cloudy, rain",
+      "partly-cloudy_rain_0": "partly cloudy, light rain",
+      "cloudy_rain_0": "cloudy, light rain",
+      "partly-cloudy_snow_0": "partly cloudy, light snow",
+      "cloudy_snow_0": "cloudy, light snow",
+      "partly-cloudy_sleet_0": "partly cloudy, light precipitation",
+      "cloudy_sleet_0": "cloudy, light rain",
+      "cloudy_snowstorm_1": "cloudy, blizzard",
+      "mainly-clear": "mainly clear",
+      "semitransparent": "translucent cloudiness",
+      "partly-cloudy_snow_1": "partly cloudy, snow",
+      "partly-cloudy_sleet_1": "partly cloudy, precipitation",
+      "partly-cloudy_rain_0_thunderstorm_1": "partly cloudy, light rain, thunderstorms possible",
+      "cloudy_rain_0_thunderstorm_1": "cloudy, light rain, thunderstorms possible",
+      "mainly-clear_rain_1_thunderstorm_1": "mainly clear, intermittent rain, thunderstorm",
+      "mainly-clear_rain_0_thunderstorm_1": "mainly clear, light rain, possible thunderstorm",
+      "cloudy_rain_1_thunderstorm_1_hail_1": "cloudy, rain, thunderstorm, chance of hail",
+      "cloudy_rain_1_thunderstorm_1": "cloudy, rain, thunderstorm",
+      "mainly-clear_rain_0": "mainly clear, light rain",
+      "mostly-cloudy": "mostly cloudy"
+    }
+  }
+}
