@@ -1,11 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-import axios from "axios";
 
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
-import ListAllCities from "@/views/ListAllCities.vue";
+import ListTopWorldCities from "@/views/ListTopWorldCities.vue";
+import ListCountries from "@/views/ListCountries.vue";
+import CountryPage from "@/views/CountryPage.vue";
+import ListCountryRegions from "@/views/ListCountryRegions.vue";
 import TabInformerDay from "@/views/TabInformerDay.vue";
 import TabInformerHourly from "@/views/TabInformerHourly.vue";
 import TabInformerMain from "@/views/TabInformerMain.vue";
@@ -15,9 +17,49 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    // Список стран + популярные города страны.
+    path: "/:lang?/countries",
+    name: "countries",
+    component: ListCountries,
+    /**
+     * В метаданных маршрутов указываем информацию для навигации по
+     * хлебным крошкам.
+     */
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "cities" }],
+    },
+  },
+  {
+    // Список популярных городов всех стран.
     path: "/:lang?/cities",
-    name: "cities",
-    component: ListAllCities,
+    name: "topWorldCities",
+    component: ListTopWorldCities,
+    /**
+     * В метаданных маршрутов указываем информацию для навигации по
+     * хлебным крошкам.
+     */
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "cities" }],
+    },
+  },
+  {
+    //  Список регионов страны + популярные города регионов.
+    path: "/:lang?/:country/regions",
+    name: "country",
+    component: CountryPage,
+    /**
+     * В метаданных маршрутов указываем информацию для навигации по
+     * хлебным крошкам.
+     */
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "cities" }],
+    },
+  },
+  {
+    // Список городов для выбранной страны и опционально выбранного региона.
+    path: "/:lang?/:country/:region?/cities",
+    name: "regions",
+    component: ListCountryRegions,
     /**
      * В метаданных маршрутов указываем информацию для навигации по
      * хлебным крошкам.
@@ -105,10 +147,9 @@ router.beforeEach((to, from, next) => {
   store.dispatch("setParams", obj).then((code) => {
     /**
      * Код 404 указывает на не существующую страницу,
-     * отправляется запрос на сервер для получения ответа с кодом 404.
      */
     if (code === 404) {
-      axios.get(to.path).catch((err) => console.log(err));
+      console.log(to.path.split("/").slice(2));
       next({
         name: "not-found",
         params: {

@@ -1,6 +1,5 @@
 {
   "supportedLocales": [
-    { "key": "am", "title": "Հայ" },
     { "key": "ru", "title": "рус" },
     { "key": "en", "title": "eng" }
   ]

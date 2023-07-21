@@ -14,8 +14,6 @@ import {
   setMapDataset,
   SET_LIST_TOP_CITIES,
   setListTopCities,
-  SET_CONSTANTS,
-  setConstants,
   SET_CITY,
   setCity,
   SET_LOCALE,
@@ -70,18 +68,17 @@ export default new Vuex.Store({
      * Название страны на разных языках.
      */
     country_loc: {
-      ru: "Армения",
-      en: "Armenia",
-      am: "Հայաստանի",
+      ru: "Россия",
+      en: "Russia",
     },
     /**
      * Устанавливаем город по умолчанию.
      */
-    defaultCity: "yerevan",
+    defaultCity: "moscow",
     /**
      * Устанавливаем язык по умолчанию.
      */
-    defaultLocale: "am",
+    defaultLocale: "ru",
     /**
      * Город для которого выводится прогноз погоды.
      */
@@ -1179,7 +1176,6 @@ export default new Vuex.Store({
     [SET_LIST_ALL_CITIES]: setListAllCities,
     [SET_MAP_DATA_SET]: setMapDataset,
     [SET_LIST_TOP_CITIES]: setListTopCities,
-    [SET_CONSTANTS]: setConstants,
     [SET_CITY]: setCity,
     [SET_LOCALE]: setLocale,
     [SET_SUPPORTED_LOCALES]: setSupportedLocales,
@@ -1198,6 +1194,14 @@ export default new Vuex.Store({
       commit(CHANGE_OPENING_CARD, { index, card });
     },
     /**
+     * Загружаем объект с переводами по выбранной локали.
+     */
+    loadConstants: async ({ commit, state }) => {
+      const res = await axios(`./locales/${state.currentLocale}.json`).catch((err) =>
+        console.log(err)
+      );
+    },
+    /**
      * Get data from Internal vs External APIs.
      */
     loadData: async ({ commit }) => {
@@ -1209,7 +1213,6 @@ export default new Vuex.Store({
           axios.get("/cities_all.json"),
           axios.get("/map_dataset.json"),
           axios.get("/top_cities.json"),
-          axios.get("/translated_constants.json"),
           axios.get("/supported-locales.json"),
           new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
         ]);
@@ -1219,7 +1222,7 @@ export default new Vuex.Store({
           cities,
           mapDataset,
           topCities,
-          constants,
+          // constants,
           supportedLocales,
         ] = res.map(({ data }) => data);
 
@@ -1228,7 +1231,6 @@ export default new Vuex.Store({
         commit(SET_LIST_ALL_CITIES, cities);
         commit(SET_MAP_DATA_SET, mapDataset);
         commit(SET_LIST_TOP_CITIES, topCities);
-        commit(SET_CONSTANTS, constants);
         commit(SET_SUPPORTED_LOCALES, supportedLocales);
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
@@ -1250,6 +1252,7 @@ export default new Vuex.Store({
       if (state.isDataLoad) {
         commit(SET_LOCALE, langURL);
         commit(SET_CITY, cityURL);
+        await dispatch("loadConstants");
         return 200;
       }
       // Переменная с городом по умолчанию.
@@ -1294,17 +1297,23 @@ export default new Vuex.Store({
 
       const city = selectCity();
       const lang = setLang();
-
+      /**
+       * Если возможное значение языка или города не
+       * найдено, то берем город и язык из local storage
+       * или дефолтное значение. После этого возвращаем код 404.
+       */
       if (lang === null || city === null) {
         commit(SET_LOCALE, langLS ?? defaultLocale);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);
+        await dispatch("loadConstants");
         return 404;
       }
 
       commit(SET_LOCALE, lang);
       commit(SET_CITY, city);
       commit(INIT_COMMIT, true);
+      await dispatch("loadConstants");
       return nameRouteURL === "not-found" ? 404 : 100;
     },
   },

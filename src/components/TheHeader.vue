@@ -2,7 +2,7 @@
   <header class="header">
     <div class="container">
       <router-link :to="pushNewURL(getLocaleURL, 'main')">
-        <BaseIcon nameIcon="country-logo" pick="common" width="150" />
+        <BaseIcon nameIcon="logo-meteonovosti" pick="common" />
       </router-link>
       <div :class="['header-dropdown', { 'hide-menu': isHide }]">
         <ul class="header-dropdown-content" @click.stop="toggleMenu">

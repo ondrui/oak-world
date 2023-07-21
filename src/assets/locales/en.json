@@ -1,0 +1,125 @@
+{
+  "cities": {
+    "title": "Weather in all cities of $_country: 1000+ cities.",
+    "description": "List of 1000+ cities in $_country for which we have weather data for all major meteorological parameters, as well as astronomical parameters.",
+    "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+  },
+  "main": {
+    "title": "Weather for 1000+ cities of $_country! Accurate hourly and detailed weather forecast for 10 days ahead.",
+    "description": "Detailed weather forecast for all cities of $_country for today tomorrow, two weeks. Accurate hourly forecast for 3 days. Astronomical parameters: sunrises and sunsets of the sun and moon.",
+    "keywords": "weather in $_country, weather, weather forecast, weather hourly, weather forecast for 10 days, weather for today, weather for tomorrow"
+  },
+  "hourly": {
+    "title": "Weather in $_city - accurate and detailed hourly forecast",
+    "description": "Accurate hourly weather forecast in $_city for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+    "keywords": "hourly weather forecast in $_city, weather in $_country, weather, weather forecast, hourly weather, weather for today, weather for tomorrow and the day after tomorrow"
+  },
+  "day": {
+    "title": "Weather in $_city for $_days days - detailed accurate forecast for every day",
+    "description": "Accurate weather forecast in $_city for $_days days for all meteorological parameters + sunrise and sunset and moon. Information about temperature, pressure, humidity, wind speed, direction and gusts.",
+    "keywords": "weather in $_city for $_days days, weather in $_country, weather, weather forecast, weather forecast for $_days days, weather for today, weather for tomorrow"
+  },
+  "sectionOtherCities": "weather for cities in $_country",
+  "asideHistory": "browsing history",
+  "viewsSwitcher": ["map", "sity"],
+  "LinkTitleCardCity": "more",
+  "timeMarker": [
+    ["now", "now"],
+    ["yesterday", "yesterday"],
+    ["today", "today"],
+    ["tomorrow", "tomorrow"],
+    ["overmorrow", "overmorrow"],
+    ["morning", "morning"],
+    ["day", "day"],
+    ["evening", "evening"],
+    ["night", "night"]
+  ],
+  "allCityBtnCaption": "All $_length locations in $_country",
+  "breadcrumbs": {
+    "main": "home",
+    "weather": "weather",
+    "cities": "list of cities"
+  },
+  "currentBlock": {
+    "now": "now at",
+    "forecast": "according to the forecast",
+    "feelsLike": "feels like"
+  },
+  "tabsDescr": {
+    "main": "main",
+    "hourly": "hourly",
+    "day": "$_length day forecast"
+  },
+  "detailsSegmentTitle": "weather in $_city - detailed forecast for $_length days",
+  "climateIndicators": {
+    "temp": "temperature",
+    "pressure": "pressure",
+    "wind": "wind",
+    "main": "main",
+    "windDirSpeed": "wind direction and speed",
+    "windGust_1": "wind gust",
+    "windGust_2": "up to",
+    "humidity": "humidity",
+    "precSum": "precipitation",
+    "precProb": "precip chance",
+    "uvi": "UVI",
+    "daytime": "sunrise & sunset",
+    "comfort": "comfort"
+  },
+  "units": {
+    "time": ["h", "m"],
+    "temp": ["°", "°С"],
+    "pressure": ["mmHg"],
+    "speed": ["m/s"],
+    "percent": "%",
+    "precSum": ["mm"]
+  },
+  "windDir": {
+    "calm": [-1111, ""],
+    "variable": [-111, ""],
+    "n": [180, "n"],
+    "ne": [225, "ne"],
+    "e": [270, "e"],
+    "se": [315, "se"],
+    "s": [0, "s"],
+    "sw": [45, "sw"],
+    "w": [90, "w"],
+    "nw": [135, "nw"]
+  },
+  "weekendDays": ["sun", "sat"],
+  "polar": {
+    "day": "polar day",
+    "night": "polar night"
+  },
+  "listAllCities": ["region", "all"],
+  "weather_sign": {
+    "cloudy_rain_1": "cloudy, rain",
+    "cloudy_snow_1": "cloudy, snow",
+    "partly-cloudy_rain_1_hail_1_thunderstorm_1": "partly cloudy, rain, thunderstorm, hail possible",
+    "cloudy_sleet_1": "cloudy, precipitation",
+    "cloudy": "cloudy",
+    "partly-cloudy": "partly cloudy",
+    "clear": "clear",
+    "partly-cloudy_rain_1_thunderstorm_1": "partly cloudy, rain, thunderstorm",
+    "partly-cloudy_rain_1": "partly cloudy, rain",
+    "partly-cloudy_rain_0": "partly cloudy, light rain",
+    "cloudy_rain_0": "cloudy, light rain",
+    "partly-cloudy_snow_0": "partly cloudy, light snow",
+    "cloudy_snow_0": "cloudy, light snow",
+    "partly-cloudy_sleet_0": "partly cloudy, light precipitation",
+    "cloudy_sleet_0": "cloudy, light rain",
+    "cloudy_snowstorm_1": "cloudy, blizzard",
+    "mainly-clear": "mainly clear",
+    "semitransparent": "translucent cloudiness",
+    "partly-cloudy_snow_1": "partly cloudy, snow",
+    "partly-cloudy_sleet_1": "partly cloudy, precipitation",
+    "partly-cloudy_rain_0_thunderstorm_1": "partly cloudy, light rain, thunderstorms possible",
+    "cloudy_rain_0_thunderstorm_1": "cloudy, light rain, thunderstorms possible",
+    "mainly-clear_rain_1_thunderstorm_1": "mainly clear, intermittent rain, thunderstorm",
+    "mainly-clear_rain_0_thunderstorm_1": "mainly clear, light rain, possible thunderstorm",
+    "cloudy_rain_1_thunderstorm_1_hail_1": "cloudy, rain, thunderstorm, chance of hail",
+    "cloudy_rain_1_thunderstorm_1": "cloudy, rain, thunderstorm",
+    "mainly-clear_rain_0": "mainly clear, light rain",
+    "mostly-cloudy": "mostly cloudy"
+  }
+}
