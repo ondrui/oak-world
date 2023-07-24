@@ -13,10 +13,7 @@
           v-for="(value, key) in tabsList"
           :key="key"
         >
-          <span v-if="key === 'main'">
-            <BaseIcon nameIcon="home" pick="common" class="home-icon" />
-          </span>
-          <span v-else>{{ showTitle(value, key) }}</span>
+          <span>{{ showTitle(value, key) }}</span>
         </button>
       </div>
       <div class="tab">
@@ -31,9 +28,9 @@
 <script>
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
-import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
-import CurrentBlock from "../components/CurrentBlock.vue";
-import AllSVGIcons from "../components/AllSVGIcons.vue";
+import DetailsSegment from "./DetailsSegment/DetailsSegment.vue";
+import CurrentBlock from "./CurrentBlock.vue";
+import AllSVGIcons from "./AllSVGIcons.vue";
 
 export default {
   name: "WeatherInformer",
@@ -47,7 +44,7 @@ export default {
       /**
        * @param currentTab Имя открытой вкладки (компоненты).
        */
-      currentTab: "main",
+      currentTab: "hourly",
       /**
        * @param hover Подсветка вкладки при изменении параметра.
        */
@@ -56,7 +53,7 @@ export default {
   },
   created() {
     // При создании компоненты подсвечиваем вкладку из маршрута роутера.
-    this.currentTab = this.$route.name;
+    this.currentTab = this.$route.name === "main" ? "hourly" : this.$route.name;
     // При создании компоненты подписываемся на событие highlight
     // и устанавливаем обработчик на событие.
     eventBus.$on("highlight", (bol) => {
@@ -72,7 +69,7 @@ export default {
      * При изменении марщрута роутера подсвечиваем выбранную вкладку.
      */
     "$route.name"(name) {
-      this.currentTab = name;
+      this.currentTab = name === "main" ? "hourly" : name;
     },
   },
   computed: {
@@ -147,7 +144,7 @@ export default {
 .buttons-tabs {
   width: 100%;
   display: grid;
-  grid-template-columns: min-content 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: flex-end;
   column-gap: 2px;
   position: relative;
@@ -165,10 +162,6 @@ export default {
     background-color: #ffffff;
     border-radius: 4px 4px 0 0;
     min-height: 34px;
-    &:first-child span {
-      display: flex;
-      padding: 10px 10px;
-    }
 
     & span {
       display: inline-block;
@@ -198,9 +191,6 @@ export default {
       border-top: none;
       border-top: 3px solid #04569c;
       border-bottom: none;
-      &:first-child span {
-        padding: 11px 10px;
-      }
 
       & span {
         color: #000000;

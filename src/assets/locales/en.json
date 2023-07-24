@@ -46,7 +46,6 @@
     "feelsLike": "feels like"
   },
   "tabsDescr": {
-    "main": "main",
     "hourly": "hourly",
     "day": "$_length day forecast"
   },

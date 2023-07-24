@@ -6,7 +6,7 @@
       <div class="main">
         <BreadCrumbs v-if="isBreadcrumbsShow" />
         <SearchBar />
-        <router-view></router-view>
+        <WeatherInformer />
       </div>
       <TheAside class="sidebar">
         <HistoryAside />
@@ -25,6 +25,7 @@ import TheHeader from "@/components/TheHeader.vue";
 import HistoryAside from "@/components/HistoryAside.vue";
 import SectionHistoryCities from "@/components/SectionHistoryCities.vue";
 import ScrollTop from "@/components/ScrollTop.vue";
+import WeatherInformer from "@/components/WeatherInformer.vue";
 
 export default {
   name: "HomePage",
@@ -35,6 +36,7 @@ export default {
     HistoryAside,
     SectionHistoryCities,
     ScrollTop,
+    WeatherInformer,
   },
   computed: {
     isBreadcrumbsShow() {
@@ -47,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 .home-page {
   position: relative;
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 .page-wrapper {
   display: grid;

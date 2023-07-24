@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <h1>WEATHER IN ARMENIA</h1>
+      <h1>список регионов страны</h1>
       <router-link :to="pushNewURL()">Перейти на главную</router-link>
     </div>
   </div>

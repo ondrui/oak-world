@@ -2,15 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
 
-import WeatherInformer from "@/views/WeatherInformer.vue";
+// import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
 import ListTopWorldCities from "@/views/ListTopWorldCities.vue";
 import ListCountries from "@/views/ListCountries.vue";
 import CountryPage from "@/views/CountryPage.vue";
-import ListCountryRegions from "@/views/ListCountryRegions.vue";
+import ListCities from "@/views/ListCities.vue";
 import TabInformerDay from "@/views/TabInformerDay.vue";
 import TabInformerHourly from "@/views/TabInformerHourly.vue";
-import TabInformerMain from "@/views/TabInformerMain.vue";
 import { LOADING } from "@/store/mutations";
 
 Vue.use(VueRouter);
@@ -43,7 +42,7 @@ const routes = [
     },
   },
   {
-    //  Список регионов страны + популярные города регионов.
+    //  Список регионов страны.
     path: "/:lang?/:country/regions",
     name: "country",
     component: CountryPage,
@@ -58,8 +57,8 @@ const routes = [
   {
     // Список городов для выбранной страны и опционально выбранного региона.
     path: "/:lang?/:country/:region?/cities",
-    name: "regions",
-    component: ListCountryRegions,
+    name: "cities",
+    component: ListCities,
     /**
      * В метаданных маршрутов указываем информацию для навигации по
      * хлебным крошкам.
@@ -68,35 +67,27 @@ const routes = [
       breadcrumb: [{ name: "main" }, { name: "cities" }],
     },
   },
+
+  {
+    path: "/:lang?:country/:region?/:city/day",
+    name: "day",
+    component: TabInformerDay,
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "weather" }],
+    },
+  },
+  {
+    path: "/:lang?:country/:region?/:city/hourly",
+    name: "hourly",
+    component: TabInformerHourly,
+    meta: {
+      breadcrumb: [{ name: "main" }, { name: "weather" }],
+    },
+  },
   {
     path: "/:lang?",
-    component: WeatherInformer,
-    children: [
-      {
-        path: "",
-        name: "main",
-        component: TabInformerMain,
-        meta: {
-          breadcrumb: [{ name: "main" }],
-        },
-      },
-      {
-        path: "pogoda/:city/day",
-        name: "day",
-        component: TabInformerDay,
-        meta: {
-          breadcrumb: [{ name: "main" }, { name: "weather" }],
-        },
-      },
-      {
-        path: "pogoda/:city/hourly",
-        name: "hourly",
-        component: TabInformerHourly,
-        meta: {
-          breadcrumb: [{ name: "main" }, { name: "weather" }],
-        },
-      },
-    ],
+    name: "main",
+    component: TabInformerHourly,
     meta: {
       breadcrumb: [{ name: "main" }, { name: "weather" }],
     },

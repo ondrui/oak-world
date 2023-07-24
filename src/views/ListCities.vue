@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div>
-      <h1>List country regions</h1>
+      <h1>
+        список городов для выбранной страны и опционально выбранного региона
+      </h1>
       <router-link :to="pushNewURL()">Перейти на главную</router-link>
     </div>
   </div>

@@ -262,12 +262,20 @@ export const bezierCommand = (point, i, a) => {
 };
 /**
  * Возврашает название города с учетом локали.
- * @param defLocale Языковая метка по умолчанию.
+ * Если название не найдено возвращает название на
+ * противоположной локали.
  * @param locale Текущая языковая локаль.
  * @param obj Объект с названиями на разных языках.
+ * @param supportedLocales Массив с поддерживаемыми языками.
  */
-export const choiceNameByLocale = (defLocale, locale, obj) => {
-  return locale !== defLocale ? obj[`name_${locale}`] : obj[`name_loc`];
+export const choiceNameByLocale = (locale, supportedLocales, obj) => {
+  if (!obj[`name_${locale}`]) {
+    const { key: oppositeLocale } = supportedLocales.find(
+      (v) => v.key !== locale
+    );
+    return obj[`name_${oppositeLocale}`];
+  }
+  return obj[`name_${locale}`];
 };
 /**
  * Возврашает название области с учетом локали.
@@ -276,7 +284,7 @@ export const choiceNameByLocale = (defLocale, locale, obj) => {
  * @param end Строка содержит дополнителиное окончание для ключа.
  */
 export const choiceAreaByLocale = (locale, obj, end) => {
-  return locale === "am" ? obj[`area_loc${end}`] : obj[`area_${locale}${end}`];
+  return obj[`area_${locale}${end}`];
 };
 /**
  * Делает строку заглавной
