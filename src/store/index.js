@@ -63,24 +63,33 @@ export default new Vuex.Store({
      */
     supportedLocales: [],
     /**
+     * Устанавливаем язык по умолчанию.
+     */
+    defaultLocale: "ru",
+    /**
      * Объект с переводами.
      */
     translatedConstants: {},
     /**
-     * Название страны на разных языках.
+     * Страна по умолчанию.
      */
-    country_loc: {
-      ru: "Россия",
-      en: "Russia",
-    },
+    defaultCountry: "россия",
+    /**
+     * Выбранная страна.
+     */
+    currentCountry: "россия",
+    /**
+     * Регион по умолчанию.
+     */
+    defaultRegion: "москва",
+    /**
+     * Выбранный регион.
+     */
+    currentRegion: "москва",
     /**
      * Устанавливаем город по умолчанию.
      */
-    defaultCity: "moscow",
-    /**
-     * Устанавливаем язык по умолчанию.
-     */
-    defaultLocale: "ru",
+    defaultCity: "москва",
     /**
      * Город для которого выводится прогноз погоды.
      */
@@ -260,9 +269,8 @@ export default new Vuex.Store({
      * @param country_loc Название страны на разных языках.
      * @param getLocale Текущий язык.
      */
-    getCountryNameLoc({ country_loc }, { getLocale }) {
-      const countryName = country_loc[getLocale];
-      return capitalize(countryName);
+    getCountryNameLoc({ currentCountry }) {
+      return capitalize(currentCountry);
     },
     /**
      * Возвращает город для которого будет выводиться прогноз.
@@ -1187,7 +1195,7 @@ export default new Vuex.Store({
           axios.get("/map_dataset.json"),
           axios.get("/top_cities.json"),
           axios.get("/supported-locales.json"),
-          new Promise((resolve) => setTimeout(() => resolve("done"), 500)),
+          new Promise((resolve) => setTimeout(() => resolve("done"), 0)),
         ]);
         const [
           total,

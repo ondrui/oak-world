@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="tab">
-        <router-view></router-view>
+        <slot />
       </div>
     </div>
     <DetailsSegment />
