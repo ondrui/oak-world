@@ -50,7 +50,7 @@ export default {
             name: "hourly",
             params: {
               lang: this.getLocaleURL,
-              city: element.name_en.toLowerCase(),
+              city: element.nameURL,
             },
             hash: "#top",
           })

@@ -265,17 +265,57 @@ export const bezierCommand = (point, i, a) => {
  * Если название не найдено возвращает название на
  * противоположной локали.
  * @param locale Текущая языковая локаль.
- * @param obj Объект с названиями на разных языках.
+ * @param obj Объект описывающий город.
  * @param supportedLocales Массив с поддерживаемыми языками.
  */
-export const choiceNameByLocale = (locale, supportedLocales, obj) => {
-  if (!obj[`name_${locale}`]) {
+export const choiceCityByLocale = (locale, supportedLocales, obj) => {
+  if (obj[`name_${locale}`]) {
     const { key: oppositeLocale } = supportedLocales.find(
       (v) => v.key !== locale
     );
     return obj[`name_${oppositeLocale}`];
   }
-  return obj[`name_${locale}`];
+  return obj[`name_${locale}`] ?? obj.name_loc;
+};
+/**
+ * Возврашает название страны с учетом локали.
+ * Если название не найдено возвращает название на
+ * противоположной локали.
+ * @param locale Текущая языковая локаль.
+ * @param obj Объект описывающий город.
+ * @param supportedLocales Массив с поддерживаемыми языками.
+ */
+export const choiceCountryByLocale = (locale, supportedLocales, obj) => {
+  if (obj[`country_${locale}`].length !== 0) {
+    return obj[`country_${locale}`];
+  }
+  const { key: oppositeLocale } = supportedLocales.find(
+    (v) => v.key !== locale
+  );
+  if (obj[`country_${oppositeLocale}`].length !== 0) {
+    return obj[`country_${oppositeLocale}`];
+  }
+  return obj[`country_${locale}`];
+};
+/**
+ * Возврашает название региона с учетом локали.
+ * Если название не найдено возвращает название на
+ * противоположной локали.
+ * @param locale Текущая языковая локаль.
+ * @param obj Объект описывающий город.
+ * @param supportedLocales Массив с поддерживаемыми языками.
+ */
+export const choiceRegionByLocale = (locale, supportedLocales, obj) => {
+  if (obj[`region_${locale}`].length !== 0) {
+    return obj[`region_${locale}`];
+  }
+  const { key: oppositeLocale } = supportedLocales.find(
+    (v) => v.key !== locale
+  );
+  if (obj[`region_${oppositeLocale}`].length !== 0) {
+    return obj[`region_${oppositeLocale}`];
+  }
+  return obj[`region_${locale}`];
 };
 /**
  * Возврашает название области с учетом локали.

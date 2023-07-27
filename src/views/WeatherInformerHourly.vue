@@ -4,8 +4,8 @@
   </WeatherInformer>
 </template>
 <script>
-import WeatherInformer from "@/components/WeatherInformer.vue";
-import TabInformerHourly from "@/components/TabInformerHourly.vue";
+import WeatherInformer from "@/views/WeatherInformer.vue";
+import TabInformerHourly from "@/views/TabInformerHourly.vue";
 export default {
   name: "WeatherInformerHourly",
   components: {

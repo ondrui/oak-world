@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="tab">
-        <slot />
+        <router-view></router-view>
       </div>
     </div>
     <DetailsSegment />
@@ -28,9 +28,9 @@
 <script>
 import { eventBus } from "../main.js";
 import { mapGetters } from "vuex";
-import DetailsSegment from "./DetailsSegment/DetailsSegment.vue";
-import CurrentBlock from "./CurrentBlock.vue";
-import AllSVGIcons from "./AllSVGIcons.vue";
+import DetailsSegment from "../components/DetailsSegment/DetailsSegment.vue";
+import CurrentBlock from "../components/CurrentBlock.vue";
+import AllSVGIcons from "../components/AllSVGIcons.vue";
 
 export default {
   name: "WeatherInformer",
@@ -78,6 +78,8 @@ export default {
       "getCitySelected",
       "getLocaleURL",
       "getConstantLocale",
+      "getCountrySelected",
+      "getRegionSelected",
     ]),
     /**
      * Подписи для вкладок.
@@ -94,6 +96,8 @@ export default {
      * @param key Строка содержит имя маршрута для роутера.
      * @param lang Текущая локаль берется из стора.
      * @param city Город для которого выводится прогноз погоды берется из стора.
+     * @param country Страна берется из стора.
+     * @param region Регион берется из стора.
      */
     showContent(key) {
       this.$router
@@ -101,7 +105,9 @@ export default {
           name: key,
           params: {
             lang: this.getLocaleURL,
-            city: this.getCitySelected.name_en,
+            city: this.getCitySelected.nameURL,
+            country: this.getCountrySelected,
+            region: this.getRegionSelected,
           },
         })
         .catch(() => {});

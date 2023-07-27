@@ -45,7 +45,7 @@ export default {
      * Конструктор заголовка.
      */
     segmentTitle() {
-      const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
+      const inflectCityName = cityIn(this.getCitySelected.nameLoc);
       const str = this.getConstantLocale("detailsSegmentTitle")
         .replace("$_city", inflectCityName)
         .replace("$_length", this.tenDaysDetailsCard.length);

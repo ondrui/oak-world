@@ -81,7 +81,7 @@ export default {
           name: "hourly",
           params: {
             lang: this.getLocaleURL,
-            city: this.itemDataset.name_en.toLowerCase(),
+            city: this.itemDataset.nameURL,
           },
           hash: "#top",
         })

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="loading">Loading...</div>
+    <TheSpinner v-if="loading" />
     <HomePage v-else />
   </div>
 </template>

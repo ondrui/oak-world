@@ -34,9 +34,10 @@ import {
   setTimeFormat,
   daytime,
   addPlus,
-  choiceNameByLocale,
+  choiceCityByLocale,
+  choiceCountryByLocale,
+  choiceRegionByLocale,
   choiceAreaByLocale,
-  capitalize,
 } from "@/constants/functions";
 /**
  * Day.js is a minimalist JavaScript library that parses, validates, manipulates, and
@@ -73,27 +74,47 @@ export default new Vuex.Store({
     /**
      * Страна по умолчанию.
      */
-    defaultCountry: "россия",
+    defaultCountry: "Россия",
     /**
      * Выбранная страна.
+     * @property {string} nameURL - Значение для отображения в адресной строке браузера.
+     * @property {string} nameLoc - Название с учетом языка.
      */
-    currentCountry: "россия",
+    currentCountry: {
+      nameURL: "Russia",
+      nameLoc: "Россия",
+    },
     /**
      * Регион по умолчанию.
      */
-    defaultRegion: "москва",
+    defaultRegion: "Москва",
     /**
      * Выбранный регион.
      */
-    currentRegion: "москва",
+    currentRegion: {
+      nameURL: "Moscow",
+      nameLoc: "Москва",
+    },
     /**
      * Устанавливаем город по умолчанию.
      */
-    defaultCity: "москва",
+    defaultCity: {
+      lon: 37.6174943,
+      lat: 55.7504461,
+      country_ru: "Россия",
+      country_en: "Russia",
+      country_loc: "Россия",
+      region_ru: "Москва",
+      region_en: "Moscow",
+      region_loc: "Москва",
+      name_ru: "Центральный административный округ__Москва",
+      name_en: "Central Administrative Okrug__Moscow",
+      name_loc: "Центральный административный округ__Москва",
+    },
     /**
      * Город для которого выводится прогноз погоды.
      */
-    citySelected: "",
+    currentCity: null,
     /**
      * Лоадер.
      */
@@ -265,35 +286,43 @@ export default new Vuex.Store({
       return state.loading;
     },
     /**
-     * Возвращает название страны с учетом выбранного языка.
-     * @param country_loc Название страны на разных языках.
-     * @param getLocale Текущий язык.
+     * Возвращает название страны.
+     * @param currentCountry Текущее значение store.currentCountry.
+     * @example
+     * {
+     *    nameURL:"Russia",
+     *    nameLoc:"Россия"
+     * }
      */
-    getCountryNameLoc({ currentCountry }) {
-      return capitalize(currentCountry);
+    getCountrySelected({ currentCity, supportedLocales }, { getLocale }) {
+      return choiceCountryByLocale(getLocale, supportedLocales, currentCity);
+    },
+    /**
+     * Возвращает название региона страны.
+     * @param currentCountry Текущее значение store.currentCountry.
+     * @example
+     * {
+     *    nameURL:"Russia",
+     *    nameLoc:"Россия"
+     * }
+     */
+    getRegionSelected({ currentCity, supportedLocales }, { getLocale }) {
+      return choiceRegionByLocale(getLocale, supportedLocales, currentCity);
     },
     /**
      * Возвращает город для которого будет выводиться прогноз.
-     * @param citySelected Текущее значение store.citySelected.
-     * @param supportedLocales Массив с поддерживаемыми языками.
-     * @param getLocale Текущий язык.
+     * Используется в компонентах<div className=""></div>
+     * @param currentCity Текущее значение store.currentCity.
      * @example
-     * {name_en:"amasia",name_loc_choice:"Амасия"}
+     * {
+     *    nameURL:"Central Administrative Okrug__Moscow",
+     *    nameLoc:"округ__Москва"
+     * }
      */
-    getCitySelected(
-      { listAllCities, citySelected, supportedLocales },
-      { getLocale }
-    ) {
-      const city = listAllCities.find(
-        ({ name_en }) => name_en.toLowerCase() === citySelected.toLowerCase()
-      );
-      if (!city) {
-        return;
-      }
-      const cityName = choiceNameByLocale(getLocale, supportedLocales, city);
+    getCitySelected({ currentCity, supportedLocales }, { getLocale }) {
       return {
-        name_en: city.name_en.toLowerCase(),
-        name_loc_choice: capitalize(cityName),
+        nameURL: choiceCityByLocale(getLocale, supportedLocales, currentCity),
+        nameLoc: choiceCityByLocale(getLocale, supportedLocales, currentCity),
       };
     },
     /**
@@ -1021,7 +1050,7 @@ export default new Vuex.Store({
         return { ...value, name_loc };
       });
       return arr.map((e) => {
-        const cityName = choiceNameByLocale(getLocale, supportedLocales, e);
+        const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
         // Добавляем в карточку для отображения временную метку суток
         // в выбранной локали.
         const localDetails = e.details?.map((value) => {
@@ -1042,7 +1071,7 @@ export default new Vuex.Store({
           area_en: e.area_en,
           details: localDetails,
           home: e.home,
-          name_en: e.name_en.toLowerCase(),
+          name_en: e.name_en,
           name_loc_choice: cityName,
           now: e.now,
           overmorrow: e.overmorrow,
@@ -1061,10 +1090,10 @@ export default new Vuex.Store({
     getListTopCities: ({ listTopCities, supportedLocales }, { getLocale }) => {
       return listTopCities
         .map((e) => {
-          const cityName = choiceNameByLocale(getLocale, supportedLocales, e);
+          const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
           return {
             temp: e.temp,
-            name_en: e.name_en.toLowerCase(),
+            name_en: e.nameURL,
             name_loc_choice: cityName,
           };
         })
@@ -1098,7 +1127,7 @@ export default new Vuex.Store({
           // Создаем массив объектов с городами, в которых оставляем
           // необходимые поля с заданным форматированием.
           .map((e) => {
-            const cityName = choiceNameByLocale(getLocale, supportedLocales, e);
+            const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
             const area = choiceAreaByLocale(getLocale, e, "");
             const area_l5 = choiceAreaByLocale(getLocale, e, "_l5");
             const formatArea_ru = (str) =>
@@ -1110,7 +1139,7 @@ export default new Vuex.Store({
               return arr.join("");
             };
             return {
-              name_en: e.name_en.toLowerCase(),
+              name_en: e.nameURL,
               name_loc_choice: cityName,
               area,
               area_l5,
@@ -1146,6 +1175,17 @@ export default new Vuex.Store({
       );
       const arr = Object.keys(obj).sort((a, b) => a.localeCompare(b));
       return arr;
+    },
+    /**
+     * Вычисляем значение параметров URL для последующего POST запроса
+     * к серверу.
+     */
+    computedParamsURL: ({ defaultCity }) => {
+      // Получаем из local storage объект с описанием последнего выбранного города.
+      const strCity = localStorage.getItem("city");
+      const city = JSON.parse(strCity);
+      console.log(city);
+      return defaultCity;
     },
   },
   mutations: {
@@ -1195,7 +1235,7 @@ export default new Vuex.Store({
           axios.get("/map_dataset.json"),
           axios.get("/top_cities.json"),
           axios.get("/supported-locales.json"),
-          new Promise((resolve) => setTimeout(() => resolve("done"), 0)),
+          new Promise((resolve) => setTimeout(() => resolve("done"), 100)),
         ]);
         const [
           total,
@@ -1213,6 +1253,7 @@ export default new Vuex.Store({
         commit(SET_MAP_DATA_SET, mapDataset);
         commit(SET_LIST_TOP_CITIES, topCities);
         commit(SET_SUPPORTED_LOCALES, supportedLocales);
+        console.log("action finished loadData");
       } catch (error) {
         console.error("Error! Could not reach the API. " + error);
       }
@@ -1224,15 +1265,26 @@ export default new Vuex.Store({
      * Возвращает числовой код нужный роутеру для перехода
      * на требуемую страницу.
      */
-    setParams: async (
-      { state, commit, dispatch },
-      { langURL, cityURL, nameRouteURL }
+    manageActions: async (
+      { state, commit, getters, dispatch },
+      { langURL, cityURL, nameRouteURL, countryURL, regionURL }
     ) => {
+      console.log(
+        "start manageActions",
+        langURL,
+        cityURL,
+        nameRouteURL,
+        countryURL,
+        regionURL
+      );
+      getters.computedParamsURL;
+
       // Если это не первоначальная загрузка приложения, то
       // используем язык и город из параметров маршрута роутера.
       if (state.isDataLoad) {
+        console.log("data already loaded manageActions");
         commit(SET_LOCALE, langURL);
-        commit(SET_CITY, cityURL);
+        commit(SET_CITY, state.currentCity);
         await dispatch("loadConstants");
         return 200;
       }
@@ -1242,7 +1294,8 @@ export default new Vuex.Store({
       const defaultLocale = state.defaultLocale;
       // Переменная с городом и языковой меткой из LocalStorage.
       const langLS = localStorage.getItem("lang");
-      const cityLS = localStorage.getItem("city");
+      const strCity = localStorage.getItem("city");
+      const cityLS = JSON.parse(strCity);
       // Загружаем данные с сервера.
       await dispatch("loadData");
       /**
@@ -1260,30 +1313,30 @@ export default new Vuex.Store({
 
         return isLocaleSupported ? langURL : null;
       };
-      /**
-       * Проверяем и устанавливаем значение города.
-       */
-      const selectCity = () => {
-        if (!cityURL) {
-          return cityLS ?? defaultCity;
-        }
-        // Проверяем содержит ли массив со всеми городами
-        // параметр cityURL.
-        const hasCityInTheList = state.listAllCities.some(
-          (obj) => obj.name_en.toLowerCase() === cityURL.toLowerCase()
-        );
+      // /**
+      //  * Проверяем и устанавливаем значение города.
+      //  */
+      // const selectCity = () => {
+      //   if (!cityURL) {
+      //     return cityLS ?? defaultCity;
+      //   }
+      //   // Проверяем содержит ли массив со всеми городами
+      //   // параметр cityURL.
+      //   const hasCityInTheList = state.listAllCities.some(
+      //     (obj) => obj.nameURL === cityURL.toLowerCase()
+      //   );
 
-        return hasCityInTheList ? cityURL : null;
-      };
+      //   return hasCityInTheList ? cityURL : null;
+      // };
 
-      const city = selectCity();
+      // const city = selectCity();
       const lang = setLang();
       /**
        * Если возможное значение языка или города не
        * найдено, то берем город и язык из local storage
        * или дефолтное значение. После этого возвращаем код 404.
        */
-      if (lang === null || city === null) {
+      if (lang === null) {
         commit(SET_LOCALE, langLS ?? defaultLocale);
         commit(SET_CITY, cityLS ?? defaultCity);
         commit(INIT_COMMIT, true);
@@ -1292,7 +1345,7 @@ export default new Vuex.Store({
       }
 
       commit(SET_LOCALE, lang);
-      commit(SET_CITY, city);
+      commit(SET_CITY, cityLS ?? defaultCity);
       commit(INIT_COMMIT, true);
       await dispatch("loadConstants");
       return nameRouteURL === "not-found" ? 404 : 100;

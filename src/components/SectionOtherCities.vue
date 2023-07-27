@@ -35,12 +35,12 @@ export default {
     cardMapData() {
       return this.$store.getters.cardMapData.slice(0, 5);
     },
-    ...mapGetters(["getCountryNameLoc", "getConstantLocale"]),
+    ...mapGetters(["getCountrySelected", "getConstantLocale"]),
     /**
      * Динамически создаем заголовок блоку.
      */
     getHistoryTitle() {
-      const country = cityIn(this.getCountryNameLoc);
+      const country = cityIn(this.getCountrySelected);
       const arr = this.getConstantLocale("sectionOtherCities").split(" ");
       return [arr.shift(), arr.join(" ").replace("$_country", country)];
     },

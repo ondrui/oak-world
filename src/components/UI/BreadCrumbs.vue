@@ -74,7 +74,7 @@ export default {
        * не называются "main" и "cities".
        */
       arr.some(({ name }) => name !== "main" && name !== "cities")
-        ? crumbsArr.push(this.getCitySelected.name_loc_choice)
+        ? crumbsArr.push(this.getCitySelected.nameLoc)
         : crumbsArr;
       this.breadcrumbList = crumbsArr;
     },

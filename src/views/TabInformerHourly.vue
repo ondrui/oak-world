@@ -2,15 +2,17 @@
   <div class="wrapper">
     <ScrollableModeInformer
       :labelCoordinates="{
-        temp: '135px',
-        wind: '333px',
-        pressure: '386px',
-        humidity: '423px',
+        temp: '156px',
+        wind: '355px',
+        pressure: '409px',
+        humidity: '444px',
       }"
+      isGrabCursor
     >
       <template #row-caption>
         <RowCaptionInformer class="temp">
-          {{ getConstantLocale("climateIndicators", "temp") }}
+          {{ getConstantLocale("climateIndicators", "temp") }} /
+          {{ getConstantLocale("currentBlock", "feelsLike") }}
         </RowCaptionInformer>
         <RowCaptionInformer class="wind">
           {{ getConstantLocale("climateIndicators", "windDirSpeed") }}
@@ -23,20 +25,20 @@
           {{ getConstantLocale("climateIndicators", "humidity") }}
         </RowCaptionInformer>
       </template>
-      <TabInformerDayContent
+      <TabInformerHourlyContent
     /></ScrollableModeInformer>
   </div>
 </template>
 
 <script>
 import ScrollableModeInformer from "@/components/ScrollableModeInformer.vue";
-import TabInformerDayContent from "@/components/TabInformerDayContent.vue";
+import TabInformerHourlyContent from "@/components/TabInformerHourlyContent.vue";
 import RowCaptionInformer from "@/components/RowCaptionInformer.vue";
 import { mapGetters } from "vuex";
 import { cityIn } from "lvovich";
 
 export default {
-  name: "TabInformerDay",
+  name: "TabInformerHourly",
   /**
    * Параметр компонента, который содержит всю информацию,
    * которая преобразуется в различные метатеги и атрибуты страницы.
@@ -45,31 +47,23 @@ export default {
    * Добавляет на страницу метатег <meta> с атрибутом name и description.
    */
   head() {
-    const inflectCityName = cityIn(this.getCitySelected.name_loc_choice);
-    const country = cityIn(this.getCountryNameLoc);
-    const daysNum = this.tenDaysTabTable.length;
-    const strTitle = this.getConstantLocale("day", "title")
+    const inflectCityName = cityIn(this.getCitySelected.nameLoc);
+    const country = cityIn(this.getCountrySelected);
+    const strKeywords = this.getConstantLocale("hourly", "keywords")
       .replace("$_city", inflectCityName)
-      .replace("$_days", daysNum);
-    const strDescr =
-      this.getLocale === "am"
-        ? this.getConstantLocale("day", "description")
-            .replace("$_days", daysNum)
-            .replace("$_city", inflectCityName)
-        : this.getConstantLocale("day", "description")
-            .replace("$_city", inflectCityName)
-            .replace("$_days", daysNum);
-    const strKeywords = this.getConstantLocale("day", "keywords")
-      .replace("$_city", inflectCityName)
-      .replace("$_days", daysNum)
-      .replace("$_country", country)
-      .replace("$_days", daysNum);
+      .replace("$_country", country);
     return {
-      title: strTitle,
+      title: this.getConstantLocale("hourly", "title").replace(
+        "$_city",
+        inflectCityName
+      ),
       meta: [
         {
           name: "description",
-          content: strDescr,
+          content: this.getConstantLocale("hourly", "description").replace(
+            "$_city",
+            inflectCityName
+          ),
         },
         {
           name: "keywords",
@@ -80,16 +74,14 @@ export default {
   },
   components: {
     ScrollableModeInformer,
-    TabInformerDayContent,
+    TabInformerHourlyContent,
     RowCaptionInformer,
   },
   computed: {
     ...mapGetters([
       "getConstantLocale",
-      "tenDaysTabTable",
       "getCitySelected",
-      "getCountryNameLoc",
-      "getLocale",
+      "getCountrySelected",
     ]),
   },
 };

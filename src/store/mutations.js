@@ -143,10 +143,11 @@ export const setConstants = (state, constants) => {
  */
 export const SET_CITY = "setCity";
 export const setCity = (state, city) => {
+  console.log("mut SET_CITY");
   if (city === undefined) return;
-  state.citySelected = city.toLowerCase();
-  // Сохраняем название города на английском в local storage.
-  localStorage.setItem("city", state.citySelected);
+  state.currentCity = city;
+  // Сохраняем объект с информацией по городу в local storage.
+  localStorage.setItem("city", JSON.stringify(state.currentCity));
 };
 /**
  * Изменяем текущую локаль в сторе.

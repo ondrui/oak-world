@@ -2,14 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
 
-// import WeatherInformer from "@/views/WeatherInformer.vue";
 import NotFound from "@/views/NotFound.vue";
 import ListTopWorldCities from "@/views/ListTopWorldCities.vue";
 import ListCountries from "@/views/ListCountries.vue";
 import CountryPage from "@/views/CountryPage.vue";
 import ListCities from "@/views/ListCities.vue";
-import WeatherInformerDay from "@/views/WeatherInformerDay.vue";
-import WeatherInformerHourly from "@/views/WeatherInformerHourly.vue";
+import WeatherInformer from "@/views/WeatherInformer.vue";
+import TabInformerDay from "@/views/TabInformerDay.vue";
+import TabInformerHourly from "@/views/TabInformerHourly.vue";
 import { LOADING } from "@/store/mutations";
 
 Vue.use(VueRouter);
@@ -67,31 +67,37 @@ const routes = [
       breadcrumb: [{ name: "main" }, { name: "cities" }],
     },
   },
+  {
+    path: "/",
+    component: WeatherInformer,
+    children: [
+      {
+        path: "/:lang?/:country/:region?/:city/day",
+        name: "day",
+        component: TabInformerDay,
+        meta: {
+          breadcrumb: [{ name: "main" }, { name: "weather" }],
+        },
+      },
+      {
+        path: "/:lang?/:country/:region?/:city/hourly",
+        name: "hourly",
+        component: TabInformerHourly,
+        meta: {
+          breadcrumb: [{ name: "main" }, { name: "weather" }],
+        },
+      },
+      {
+        path: "/:lang?",
+        name: "main",
+        component: TabInformerHourly,
+        meta: {
+          breadcrumb: [{ name: "main" }, { name: "weather" }],
+        },
+      },
+    ],
+  },
 
-  {
-    path: "/:lang?/:country/:region?/:city/day",
-    name: "day",
-    component: WeatherInformerDay,
-    meta: {
-      breadcrumb: [{ name: "main" }, { name: "weather" }],
-    },
-  },
-  {
-    path: "/:lang?/:country/:region?/:city/hourly",
-    name: "hourly",
-    component: WeatherInformerHourly,
-    meta: {
-      breadcrumb: [{ name: "main" }, { name: "weather" }],
-    },
-  },
-  {
-    path: "/:lang?",
-    name: "main",
-    component: WeatherInformerHourly,
-    meta: {
-      breadcrumb: [{ name: "main" }, { name: "weather" }],
-    },
-  },
   {
     path: "/:lang?/:pathMatch(.*)*",
     name: "not-found",
@@ -113,7 +119,6 @@ const router = new VueRouter({
       (to.name !== "main" && to.name !== "day" && to.name !== "hourly") ||
       to.hash === "#top"
     ) {
-      console.log("scroll to top!");
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -122,7 +127,6 @@ const router = new VueRouter({
     // Прокручиваем страницу к выбранной карточке при ее выборе
     // на графике дневного прогноза.
     if (to.hash && to.hash !== "#top") {
-      console.log("hash");
       // Используем таймаут, чтобы к началу перехода к элементу карточка
       // с графиком успела раскрыться и размер страницы пересчитался.
       return new Promise((resolve) => {
@@ -139,6 +143,7 @@ const router = new VueRouter({
  * Результатом его завершения будет код, который обрабатывается в хуке.
  */
 router.beforeEach(async (to, from, next) => {
+  console.log("start hook beforeEach");
   console.table("from", from);
   console.table("to", to);
   const obj = {
@@ -149,9 +154,11 @@ router.beforeEach(async (to, from, next) => {
     nameRouteURL: to.name,
   };
   console.log(obj, "call function in hook beforeEach router!");
-  const code = await store.dispatch("setParams", obj);
+  const code = await store.dispatch("manageActions", obj);
   /**
-   * Код 404 указывает на несуществующую страницу,
+   * Код 404 указывает на несуществующую страницу.
+   * Условие нужно для вывода страницы not-found если
+   * сервер не прислал данные по запрошенным параметрам.
    */
   if (code === 404) {
     console.log("code 404");
@@ -169,16 +176,6 @@ router.beforeEach(async (to, from, next) => {
     /**
      * Код 100 означает первоначальную загрузку приложения.
      */
-  } else if (code === 100) {
-    console.log("code 100 initial download");
-    next({
-      name: to.name,
-      params: {
-        lang: store.getters.getLocaleURL,
-        city: store.getters.getCitySelected.name_en,
-        country: store.getters.getCountryNameLoc,
-      },
-    });
   } else {
     console.log("exit hook beforEach router");
     store.commit(LOADING, false);
