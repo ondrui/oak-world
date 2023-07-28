@@ -19,6 +19,8 @@ export default {
       "getListAllCities",
       "getConstantLocale",
       "getCitySelected",
+      "getCountrySelected",
+      "getRegionSelected",
       "getLocaleURL",
     ]),
     isBreadcrumbsShow() {
@@ -28,7 +30,7 @@ export default {
      * Возвращает строку с текстовым содержимым ссылки.
      */
     getTitleLink() {
-      const country = cityIn(this.getCountrySelected);
+      const country = cityIn(this.getCountrySelected.nameLoc);
       return this.getConstantLocale("allCityBtnCaption")
         .replace("$_length", this.getListAllCities.length)
         .replace("$_country", country);
@@ -46,7 +48,9 @@ export default {
         name: "countries",
         params: {
           lang: this.getLocaleURL,
-          city: this.getCitySelected.name_en,
+          city: this.getCitySelected.nameURL,
+          country: this.getCountrySelected.nameURL,
+          region: this.getRegionSelected.nameURL,
         },
       };
     },

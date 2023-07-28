@@ -34,10 +34,8 @@ import {
   setTimeFormat,
   daytime,
   addPlus,
-  choiceCityByLocale,
-  choiceCountryByLocale,
-  choiceRegionByLocale,
   choiceAreaByLocale,
+  choiceNameByLocale,
 } from "@/constants/functions";
 /**
  * Day.js is a minimalist JavaScript library that parses, validates, manipulates, and
@@ -72,30 +70,6 @@ export default new Vuex.Store({
      */
     translatedConstants: {},
     /**
-     * Страна по умолчанию.
-     */
-    defaultCountry: "Россия",
-    /**
-     * Выбранная страна.
-     * @property {string} nameURL - Значение для отображения в адресной строке браузера.
-     * @property {string} nameLoc - Название с учетом языка.
-     */
-    currentCountry: {
-      nameURL: "Russia",
-      nameLoc: "Россия",
-    },
-    /**
-     * Регион по умолчанию.
-     */
-    defaultRegion: "Москва",
-    /**
-     * Выбранный регион.
-     */
-    currentRegion: {
-      nameURL: "Moscow",
-      nameLoc: "Москва",
-    },
-    /**
      * Устанавливаем город по умолчанию.
      */
     defaultCity: {
@@ -107,9 +81,9 @@ export default new Vuex.Store({
       region_ru: "Москва",
       region_en: "Moscow",
       region_loc: "Москва",
-      name_ru: "Центральный административный округ__Москва",
-      name_en: "Central Administrative Okrug__Moscow",
-      name_loc: "Центральный административный округ__Москва",
+      name_ru: "Москва__Центральный административный округ",
+      name_en: "Moscow__Central Administrative Okrug",
+      name_loc: "Москва__Центральный административный округ",
     },
     /**
      * Город для которого выводится прогноз погоды.
@@ -287,7 +261,7 @@ export default new Vuex.Store({
     },
     /**
      * Возвращает название страны.
-     * @param currentCountry Текущее значение store.currentCountry.
+     * @param currentCity Текущее значение store.currentCity.
      * @example
      * {
      *    nameURL:"Russia",
@@ -295,11 +269,24 @@ export default new Vuex.Store({
      * }
      */
     getCountrySelected({ currentCity, supportedLocales }, { getLocale }) {
-      return choiceCountryByLocale(getLocale, supportedLocales, currentCity);
+      return {
+        nameURL: choiceNameByLocale(
+          "country",
+          "en",
+          supportedLocales,
+          currentCity
+        ),
+        nameLoc: choiceNameByLocale(
+          "country",
+          getLocale,
+          supportedLocales,
+          currentCity
+        ),
+      };
     },
     /**
      * Возвращает название региона страны.
-     * @param currentCountry Текущее значение store.currentCountry.
+     * @param currentCity Текущее значение store.currentCity.
      * @example
      * {
      *    nameURL:"Russia",
@@ -307,7 +294,20 @@ export default new Vuex.Store({
      * }
      */
     getRegionSelected({ currentCity, supportedLocales }, { getLocale }) {
-      return choiceRegionByLocale(getLocale, supportedLocales, currentCity);
+      return {
+        nameURL: choiceNameByLocale(
+          "region",
+          "en",
+          supportedLocales,
+          currentCity
+        ),
+        nameLoc: choiceNameByLocale(
+          "region",
+          getLocale,
+          supportedLocales,
+          currentCity
+        ),
+      };
     },
     /**
      * Возвращает город для которого будет выводиться прогноз.
@@ -315,14 +315,24 @@ export default new Vuex.Store({
      * @param currentCity Текущее значение store.currentCity.
      * @example
      * {
-     *    nameURL:"Central Administrative Okrug__Moscow",
-     *    nameLoc:"округ__Москва"
+     *    nameURL:"Moscow__Central Administrative Okrug",
+     *    nameLoc:"Москва"
      * }
      */
     getCitySelected({ currentCity, supportedLocales }, { getLocale }) {
       return {
-        nameURL: choiceCityByLocale(getLocale, supportedLocales, currentCity),
-        nameLoc: choiceCityByLocale(getLocale, supportedLocales, currentCity),
+        nameURL: choiceNameByLocale(
+          "name",
+          "en",
+          supportedLocales,
+          currentCity
+        ),
+        nameLoc: choiceNameByLocale(
+          "name",
+          getLocale,
+          supportedLocales,
+          currentCity
+        ).split("_")[0],
       };
     },
     /**
@@ -1050,7 +1060,12 @@ export default new Vuex.Store({
         return { ...value, name_loc };
       });
       return arr.map((e) => {
-        const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
+        const cityName = choiceNameByLocale(
+          "name",
+          getLocale,
+          supportedLocales,
+          e
+        );
         // Добавляем в карточку для отображения временную метку суток
         // в выбранной локали.
         const localDetails = e.details?.map((value) => {
@@ -1090,7 +1105,12 @@ export default new Vuex.Store({
     getListTopCities: ({ listTopCities, supportedLocales }, { getLocale }) => {
       return listTopCities
         .map((e) => {
-          const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
+          const cityName = choiceNameByLocale(
+            "name",
+            getLocale,
+            supportedLocales,
+            e
+          );
           return {
             temp: e.temp,
             name_en: e.nameURL,
@@ -1127,7 +1147,12 @@ export default new Vuex.Store({
           // Создаем массив объектов с городами, в которых оставляем
           // необходимые поля с заданным форматированием.
           .map((e) => {
-            const cityName = choiceCityByLocale(getLocale, supportedLocales, e);
+            const cityName = choiceNameByLocale(
+              "name",
+              getLocale,
+              supportedLocales,
+              e
+            );
             const area = choiceAreaByLocale(getLocale, e, "");
             const area_l5 = choiceAreaByLocale(getLocale, e, "_l5");
             const formatArea_ru = (str) =>

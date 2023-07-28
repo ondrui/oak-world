@@ -74,7 +74,7 @@ export default {
    * Добавляет на страницу метатег <meta> с атрибутом name и description.
    */
   head() {
-    const country = cityIn(this.getCountrySelected);
+    const country = cityIn(this.getCountrySelected.nameLoc);
     return {
       title: this.getConstantLocale("cities", "title").replace(
         "$_country",

@@ -46,7 +46,7 @@ export default {
    */
   head() {
     const inflectCityName = cityIn(this.getCitySelected.nameLoc);
-    const country = cityIn(this.getCountrySelected);
+    const country = cityIn(this.getCountrySelected.nameLoc);
     const daysNum = this.tenDaysTabTable.length;
     const strTitle = this.getConstantLocale("day", "title")
       .replace("$_city", inflectCityName)

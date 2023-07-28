@@ -40,7 +40,7 @@ export default {
      * Динамически создаем заголовок блоку.
      */
     getHistoryTitle() {
-      const country = cityIn(this.getCountrySelected);
+      const country = cityIn(this.getCountrySelected.nameLoc);
       const arr = this.getConstantLocale("sectionOtherCities").split(" ");
       return [arr.shift(), arr.join(" ").replace("$_country", country)];
     },

@@ -48,7 +48,7 @@ export default {
    */
   head() {
     const inflectCityName = cityIn(this.getCitySelected.nameLoc);
-    const country = cityIn(this.getCountrySelected);
+    const country = cityIn(this.getCountrySelected.nameLoc);
     const strKeywords = this.getConstantLocale("hourly", "keywords")
       .replace("$_city", inflectCityName)
       .replace("$_country", country);

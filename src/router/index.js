@@ -173,9 +173,6 @@ router.beforeEach(async (to, from, next) => {
         breadcrumb: [{ name: "404" }],
       },
     });
-    /**
-     * Код 100 означает первоначальную загрузку приложения.
-     */
   } else {
     console.log("exit hook beforEach router");
     store.commit(LOADING, false);

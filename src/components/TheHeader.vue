@@ -43,6 +43,8 @@ export default {
       "tenDaysTabTable",
       "getLocale",
       "getCitySelected",
+      "getCountrySelected",
+      "getRegionSelected",
       "getLocaleURL",
       "getDefaultLocale",
       "SupportedLocalesForSwitcher",
@@ -61,7 +63,9 @@ export default {
         name: name === "main" ? name : this.$route.name,
         params: {
           lang: value === this.getDefaultLocale ? undefined : value,
-          city: this.getCitySelected.name_en,
+          city: this.getCitySelected.nameURL,
+          country: this.getCountrySelected.nameURL,
+          region: this.getRegionSelected.nameURL,
         },
       });
       return to.location;

@@ -261,61 +261,31 @@ export const bezierCommand = (point, i, a) => {
   return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point.x},${point.y}`;
 };
 /**
- * Возврашает название города с учетом локали.
+ * Возврашает название города страны или региона с учетом локали.
  * Если название не найдено возвращает название на
  * противоположной локали.
+ * @param first Первая часть имени ключа до нижнего подчеркивания.
  * @param locale Текущая языковая локаль.
- * @param obj Объект описывающий город.
  * @param supportedLocales Массив с поддерживаемыми языками.
- */
-export const choiceCityByLocale = (locale, supportedLocales, obj) => {
-  if (obj[`name_${locale}`]) {
-    const { key: oppositeLocale } = supportedLocales.find(
-      (v) => v.key !== locale
-    );
-    return obj[`name_${oppositeLocale}`];
-  }
-  return obj[`name_${locale}`] ?? obj.name_loc;
-};
-/**
- * Возврашает название страны с учетом локали.
- * Если название не найдено возвращает название на
- * противоположной локали.
- * @param locale Текущая языковая локаль.
  * @param obj Объект описывающий город.
- * @param supportedLocales Массив с поддерживаемыми языками.
  */
-export const choiceCountryByLocale = (locale, supportedLocales, obj) => {
-  if (obj[`country_${locale}`].length !== 0) {
-    return obj[`country_${locale}`];
+export const choiceNameByLocale = (first, locale, supportedLocales, obj) => {
+  const keyName = (...arg) => arg.join("_");
+  const compare = (str) =>
+    first === "name"
+      ? obj[keyName(first, str)].split("_")[0].length !== 0
+      : obj[keyName(first, str)].length !== 0;
+
+  if (compare(locale)) {
+    return obj[keyName(first, locale)];
   }
   const { key: oppositeLocale } = supportedLocales.find(
     (v) => v.key !== locale
   );
-  if (obj[`country_${oppositeLocale}`].length !== 0) {
-    return obj[`country_${oppositeLocale}`];
+  if (compare(oppositeLocale)) {
+    return obj[keyName(first, oppositeLocale)];
   }
-  return obj[`country_${locale}`];
-};
-/**
- * Возврашает название региона с учетом локали.
- * Если название не найдено возвращает название на
- * противоположной локали.
- * @param locale Текущая языковая локаль.
- * @param obj Объект описывающий город.
- * @param supportedLocales Массив с поддерживаемыми языками.
- */
-export const choiceRegionByLocale = (locale, supportedLocales, obj) => {
-  if (obj[`region_${locale}`].length !== 0) {
-    return obj[`region_${locale}`];
-  }
-  const { key: oppositeLocale } = supportedLocales.find(
-    (v) => v.key !== locale
-  );
-  if (obj[`region_${oppositeLocale}`].length !== 0) {
-    return obj[`region_${oppositeLocale}`];
-  }
-  return obj[`region_${locale}`];
+  return obj[keyName(first, "loc")];
 };
 /**
  * Возврашает название области с учетом локали.

@@ -51,7 +51,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getCitySelected", "getLocaleURL", "getConstantLocale"]),
+    ...mapGetters([
+      "getCitySelected",
+      "getCountrySelected",
+      "getRegionSelected",
+      "getLocaleURL",
+      "getConstantLocale",
+    ]),
   },
   methods: {
     /**
@@ -89,7 +95,9 @@ export default {
         name: "main",
         params: {
           lang: this.getLocaleURL,
-          city: this.getCitySelected.name_en,
+          city: this.getCitySelected.nameURL,
+          country: this.getCountrySelected.nameURL,
+          region: this.getRegionSelected.nameURL,
         },
       };
     },

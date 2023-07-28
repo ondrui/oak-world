@@ -12,7 +12,12 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["getLocaleURL", "getCitySelected"]),
+    ...mapGetters([
+      "getLocaleURL",
+      "getCitySelected",
+      "getCountrySelected",
+      "getRegionSelected",
+    ]),
   },
   methods: {
     /**
@@ -26,7 +31,9 @@ export default {
         name: "main",
         params: {
           lang: this.getLocaleURL,
-          city: this.getCitySelected.name_en,
+          city: this.getCitySelected.nameURL,
+          country: this.getCountrySelected.nameURL,
+          region: this.getRegionSelected.nameURL,
         },
       };
     },

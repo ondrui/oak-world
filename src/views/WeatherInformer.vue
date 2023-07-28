@@ -106,8 +106,8 @@ export default {
           params: {
             lang: this.getLocaleURL,
             city: this.getCitySelected.nameURL,
-            country: this.getCountrySelected,
-            region: this.getRegionSelected,
+            country: this.getCountrySelected.nameURL,
+            region: this.getRegionSelected.nameURL,
           },
         })
         .catch(() => {});
