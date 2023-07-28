@@ -94,7 +94,7 @@ export default new Vuex.Store({
      */
     loading: false,
     /**
-     * Флаг состояния загрузки данных с сервера.
+     * Флаг состояния  первоначальной загрузки данных с сервера.
      */
     isDataLoad: false,
     /**
@@ -289,8 +289,8 @@ export default new Vuex.Store({
      * @param currentCity Текущее значение store.currentCity.
      * @example
      * {
-     *    nameURL:"Russia",
-     *    nameLoc:"Россия"
+     *    nameURL:"Moscow",
+     *    nameLoc:"Москва"
      * }
      */
     getRegionSelected({ currentCity, supportedLocales }, { getLocale }) {
@@ -1313,6 +1313,30 @@ export default new Vuex.Store({
         await dispatch("loadConstants");
         return 200;
       }
+
+      /**
+       * Проверяем переменную window.warn при первом запуске приложения.
+       * Если сервер не нашел данные по введенному URL.
+       */
+      if (window.warn && window.warn.err.length !== 0) {
+        return 404;
+      }
+
+      const loadData = async (name) => {
+        const actions = {
+          day: dispatch("daysForecast"),
+          hourly: dispatch("hourlyForecast"),
+          main: dispatch("hourlyForecast"),
+          countries: dispatch("countriesList"),
+          topWorldCities: dispatch("topWorldCities"),
+          country: dispatch("CountryPage"),
+          cities: dispatch("ListCities"),
+        };
+        return await actions[name];
+      };
+
+      await loadData(nameRouteURL);
+
       // Переменная с городом по умолчанию.
       const defaultCity = state.defaultCity;
       // Переменная с языком по умолчанию.
@@ -1322,7 +1346,7 @@ export default new Vuex.Store({
       const strCity = localStorage.getItem("city");
       const cityLS = JSON.parse(strCity);
       // Загружаем данные с сервера.
-      await dispatch("loadData");
+      // await dispatch("loadData");
       /**
        * Проверяем и устанавливаем значение локали.
        */

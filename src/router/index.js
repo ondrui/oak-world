@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     // Список стран + популярные города страны.
-    path: "/:lang?/countries",
+    path: "/:lang(\\w{2})?/countries",
     name: "countries",
     component: ListCountries,
     /**
@@ -30,7 +30,8 @@ const routes = [
   },
   {
     // Список популярных городов всех стран.
-    path: "/:lang?/cities",
+    // /:foo(\\d+) (\\w{2})
+    path: "/:lang(\\w{2})?/cities",
     name: "topWorldCities",
     component: ListTopWorldCities,
     /**
@@ -43,7 +44,7 @@ const routes = [
   },
   {
     //  Список регионов страны.
-    path: "/:lang?/:country/regions",
+    path: "/:lang(\\w{2})?/:country/regions",
     name: "country",
     component: CountryPage,
     /**
@@ -56,7 +57,7 @@ const routes = [
   },
   {
     // Список городов для выбранной страны и опционально выбранного региона.
-    path: "/:lang?/:country/:region?/cities",
+    path: "/:lang(\\w{2})?/:country/:region?/cities",
     name: "cities",
     component: ListCities,
     /**
@@ -72,7 +73,7 @@ const routes = [
     component: WeatherInformer,
     children: [
       {
-        path: "/:lang?/:country/:region?/:city/day",
+        path: "/:lang(\\w{2})?/:country/:region?/:city/day",
         name: "day",
         component: TabInformerDay,
         meta: {
@@ -80,7 +81,7 @@ const routes = [
         },
       },
       {
-        path: "/:lang?/:country/:region?/:city/hourly",
+        path: "/:lang(\\w{2})?/:country/:region?/:city/hourly",
         name: "hourly",
         component: TabInformerHourly,
         meta: {
@@ -88,7 +89,7 @@ const routes = [
         },
       },
       {
-        path: "/:lang?",
+        path: "/:lang(\\w{2})?",
         name: "main",
         component: TabInformerHourly,
         meta: {
@@ -99,7 +100,7 @@ const routes = [
   },
 
   {
-    path: "/:lang?/:pathMatch(.*)*",
+    path: "/:lang(\\w{2})?/:pathMatch(.*)*",
     name: "not-found",
     component: NotFound,
     meta: {
