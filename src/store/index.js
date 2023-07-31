@@ -10,8 +10,12 @@ import {
   changeOpeningCard,
   SET_LIST_ALL_CITIES,
   setListAllCities,
-  SET_MAP_DATA_SET,
+  SET_MAP_DATA,
   setMapDataset,
+  SET_HISTORY_DATA,
+  setHistoryDataset,
+  SET_POP_CITIES_DATA,
+  setPopCitiesData,
   SET_LIST_TOP_CITIES,
   setListTopCities,
   SET_CONSTANTS,
@@ -175,6 +179,16 @@ export default new Vuex.Store({
      * Данные для карточек на карте.
      */
     datasetsMap: [],
+    /**
+     * Массив объектов с данными для карточек
+     * в секции "ИСТОРИЯ ПРОСМОТРОВ".
+     */
+    datasetsHistory: [],
+    /**
+     * Массив объектов с данными для карточек
+     * в секции "ПОПУЛЯРНЫЕ ГОРОДА МИРА".
+     */
+    datasetsPopCities: [],
     /**
      * Список всех городов Армении.
      */
@@ -1204,12 +1218,20 @@ export default new Vuex.Store({
     /**
      * Вычисляем значение параметров URL для последующего POST запроса
      * к серверу.
+     * @param props Объект со свойствами роута (параметры, имя роута).
      */
-    computedParamsURL: ({ defaultCity }) => {
+    computedParamsURL: (state) => (props) => {
+      // Переменная с городом по умолчанию.
+      const defaultCity = state.defaultCity;
+      // Переменная с языком по умолчанию.
+      const defaultLocale = state.defaultLocale;
+      // Переменная с городом и языковой меткой из LocalStorage.
+      const langLS = localStorage.getItem("lang");
       // Получаем из local storage объект с описанием последнего выбранного города.
       const strCity = localStorage.getItem("city");
       const city = JSON.parse(strCity);
-      console.log(city);
+
+      console.log(props, defaultLocale, langLS, city);
       return defaultCity;
     },
   },
@@ -1218,7 +1240,9 @@ export default new Vuex.Store({
     [SET_DATA_API]: setDataAPI,
     [CHANGE_OPENING_CARD]: changeOpeningCard,
     [SET_LIST_ALL_CITIES]: setListAllCities,
-    [SET_MAP_DATA_SET]: setMapDataset,
+    [SET_MAP_DATA]: setMapDataset,
+    [SET_HISTORY_DATA]: setHistoryDataset,
+    [SET_POP_CITIES_DATA]: setPopCitiesData,
     [SET_LIST_TOP_CITIES]: setListTopCities,
     [SET_CONSTANTS]: setConstants,
     [SET_CITY]: setCity,
@@ -1248,72 +1272,58 @@ export default new Vuex.Store({
       commit(SET_CONSTANTS, data);
     },
     /**
-     * Get data from Internal vs External APIs.
+     * Получение списка поддерживаемых языкав.
      */
-    loadData: async ({ commit }) => {
-      commit(LOADING, true);
+    loadSupportedLocales: async ({ commit }) => {
       try {
-        const res = await Promise.all([
-          axios.get("/forecast.json"),
-          axios.get("/forecastFromAPI.json"),
-          axios.get("/cities_all.json"),
-          axios.get("/map_dataset.json"),
-          axios.get("/top_cities.json"),
-          axios.get("/supported-locales.json"),
-          new Promise((resolve) => setTimeout(() => resolve("done"), 100)),
-        ]);
-        const [
-          total,
-          data,
-          cities,
-          mapDataset,
-          topCities,
-          // constants,
-          supportedLocales,
-        ] = res.map(({ data }) => data);
-
-        commit(SET_DATA_FORECAST, total);
-        commit(SET_DATA_API, data);
-        commit(SET_LIST_ALL_CITIES, cities);
-        commit(SET_MAP_DATA_SET, mapDataset);
-        commit(SET_LIST_TOP_CITIES, topCities);
-        commit(SET_SUPPORTED_LOCALES, supportedLocales);
-        console.log("action finished loadData");
+        const { data } = await axios.get("/supported-locales.json");
+        commit(SET_SUPPORTED_LOCALES, data);
       } catch (error) {
-        console.error("Error! Could not reach the API. " + error);
+        console.error("Error! Could not load supported locales. " + error);
       }
     },
     /**
-     * @param langURL Языковая локоль из адресной строки.
-     * @param cityURL Выбранный город.
-     * @param nameRouteURL имя маршрута.
-     * Возвращает числовой код нужный роутеру для перехода
-     * на требуемую страницу.
+     * Получение данных для отображения карточек городов
+     * в секции "ИСТОРИЯ ПРОСМОТРОВ".
+     */
+    loadSectionHistory: async ({ commit }) => {
+      try {
+        const { data } = await axios.get("/map_dataset.json");
+        commit(SET_HISTORY_DATA, data);
+      } catch (error) {
+        console.error("Error! Could not load history data section. " + error);
+      }
+    },
+    /**
+     * Получение данных для отображения карточек городов
+     * в секции "ПОПУЛЯРНЫЕ ГОРОДА МИРА".
+     */
+    loadSectionPopCities: async ({ commit }) => {
+      try {
+        const { data } = await axios.get("/map_dataset.json");
+        commit(SET_SUPPORTED_LOCALES, data);
+      } catch (error) {
+        console.error("Error! Could not load pop data section. " + error);
+      }
+    },
+    /**
+     * Контролер загрузки данных для отображения
+     * @param objectRouteProps Объект со свойствами роута (параметры, имя роута).
      */
     manageActions: async (
       { state, commit, getters, dispatch },
-      { langURL, cityURL, nameRouteURL, countryURL, regionURL }
+      objectRouteProps
     ) => {
-      console.log(
-        "start manageActions",
-        langURL,
-        cityURL,
-        nameRouteURL,
-        countryURL,
-        regionURL
-      );
-      getters.computedParamsURL;
+      commit(LOADING, true);
+      console.log("start manageActions");
+      await dispatch("loadSupportedLocales");
+      await dispatch("loadSectionHistory");
 
-      // Если это не первоначальная загрузка приложения, то
-      // используем язык и город из параметров маршрута роутера.
-      if (state.isDataLoad) {
-        console.log("data already loaded manageActions");
-        commit(SET_LOCALE, langURL);
-        commit(SET_CITY, state.currentCity);
-        await dispatch("loadConstants");
-        return 200;
-      }
-
+      window.first = {
+        page: "main",
+        lang: "default",
+        country: "",
+      };
       /**
        * Проверяем переменную window.warn при первом запуске приложения.
        * Если сервер не нашел данные по введенному URL.
@@ -1321,83 +1331,102 @@ export default new Vuex.Store({
       if (window.warn && window.warn.err.length !== 0) {
         return 404;
       }
+      /**
+       * При первоначальной загрузке приложения используем данные
+       * из переменной window.first.
+       */
+      if (window.first) {
+        getters.computedParamsURL(window.first);
+      }
+
+      // Если это не первоначальная загрузка приложения, то
+      // используем язык и город из параметров маршрута роутера.
+      if (state.isDataLoad) {
+        console.log("data already loaded manageActions");
+        commit(SET_LOCALE, objectRouteProps.langURL);
+        commit(SET_CITY, state.currentCity);
+        await dispatch("loadConstants");
+        return 200;
+      }
 
       const loadData = async (name) => {
         const actions = {
-          day: dispatch("daysForecast"),
-          hourly: dispatch("hourlyForecast"),
-          main: dispatch("hourlyForecast"),
-          countries: dispatch("countriesList"),
-          topWorldCities: dispatch("topWorldCities"),
-          country: dispatch("CountryPage"),
-          cities: dispatch("ListCities"),
+          day: () => dispatch("daysForecast"),
+          hourly: () => dispatch("hourlyForecast"),
+          main: () => dispatch("hourlyForecast"),
+          countries: () => dispatch("countriesList"),
+          topWorldCities: () => dispatch("topWorldCities"),
+          country: () => dispatch("CountryPage"),
+          cities: () => dispatch("ListCities"),
         };
         return await actions[name];
       };
 
-      await loadData(nameRouteURL);
+      await loadData(objectRouteProps.nameURL);
+      commit(INIT_COMMIT, true);
+      return 200;
 
-      // Переменная с городом по умолчанию.
-      const defaultCity = state.defaultCity;
-      // Переменная с языком по умолчанию.
-      const defaultLocale = state.defaultLocale;
-      // Переменная с городом и языковой меткой из LocalStorage.
-      const langLS = localStorage.getItem("lang");
-      const strCity = localStorage.getItem("city");
-      const cityLS = JSON.parse(strCity);
-      // Загружаем данные с сервера.
-      // await dispatch("loadData");
-      /**
-       * Проверяем и устанавливаем значение локали.
-       */
-      const setLang = () => {
-        if (!langURL) {
-          return langLS ?? defaultLocale;
-        }
-        // Проверяем содержит ли массив с поддерживаемыми языками
-        // параметр langURL.
-        const isLocaleSupported = state.supportedLocales.some(
-          (obj) => obj.key.toLowerCase() === langURL.toLowerCase()
-        );
-
-        return isLocaleSupported ? langURL : null;
-      };
+      // // Переменная с городом по умолчанию.
+      // const defaultCity = state.defaultCity;
+      // // Переменная с языком по умолчанию.
+      // const defaultLocale = state.defaultLocale;
+      // // Переменная с городом и языковой меткой из LocalStorage.
+      // const langLS = localStorage.getItem("lang");
+      // const strCity = localStorage.getItem("city");
+      // const cityLS = JSON.parse(strCity);
+      // // Загружаем данные с сервера.
+      // // await dispatch("loadData");
       // /**
-      //  * Проверяем и устанавливаем значение города.
+      //  * Проверяем и устанавливаем значение локали.
       //  */
-      // const selectCity = () => {
-      //   if (!cityURL) {
-      //     return cityLS ?? defaultCity;
+      // const setLang = () => {
+      //   if (!langURL) {
+      //     return langLS ?? defaultLocale;
       //   }
-      //   // Проверяем содержит ли массив со всеми городами
-      //   // параметр cityURL.
-      //   const hasCityInTheList = state.listAllCities.some(
-      //     (obj) => obj.nameURL === cityURL.toLowerCase()
+      //   // Проверяем содержит ли массив с поддерживаемыми языками
+      //   // параметр langURL.
+      //   const isLocaleSupported = state.supportedLocales.some(
+      //     (obj) => obj.key.toLowerCase() === langURL.toLowerCase()
       //   );
 
-      //   return hasCityInTheList ? cityURL : null;
+      //   return isLocaleSupported ? langURL : null;
       // };
+      // // /**
+      // //  * Проверяем и устанавливаем значение города.
+      // //  */
+      // // const selectCity = () => {
+      // //   if (!cityURL) {
+      // //     return cityLS ?? defaultCity;
+      // //   }
+      // //   // Проверяем содержит ли массив со всеми городами
+      // //   // параметр cityURL.
+      // //   const hasCityInTheList = state.listAllCities.some(
+      // //     (obj) => obj.nameURL === cityURL.toLowerCase()
+      // //   );
 
-      // const city = selectCity();
-      const lang = setLang();
-      /**
-       * Если возможное значение языка или города не
-       * найдено, то берем город и язык из local storage
-       * или дефолтное значение. После этого возвращаем код 404.
-       */
-      if (lang === null) {
-        commit(SET_LOCALE, langLS ?? defaultLocale);
-        commit(SET_CITY, cityLS ?? defaultCity);
-        commit(INIT_COMMIT, true);
-        await dispatch("loadConstants");
-        return 404;
-      }
+      // //   return hasCityInTheList ? cityURL : null;
+      // // };
 
-      commit(SET_LOCALE, lang);
-      commit(SET_CITY, cityLS ?? defaultCity);
-      commit(INIT_COMMIT, true);
-      await dispatch("loadConstants");
-      return nameRouteURL === "not-found" ? 404 : 100;
+      // // const city = selectCity();
+      // const lang = setLang();
+      // /**
+      //  * Если возможное значение языка или города не
+      //  * найдено, то берем город и язык из local storage
+      //  * или дефолтное значение. После этого возвращаем код 404.
+      //  */
+      // if (lang === null) {
+      //   commit(SET_LOCALE, langLS ?? defaultLocale);
+      //   commit(SET_CITY, cityLS ?? defaultCity);
+      //   commit(INIT_COMMIT, true);
+      //   await dispatch("loadConstants");
+      //   return 404;
+      // }
+
+      // commit(SET_LOCALE, lang);
+      // commit(SET_CITY, cityLS ?? defaultCity);
+      // commit(INIT_COMMIT, true);
+      // await dispatch("loadConstants");
+      // return nameRouteURL === "not-found" ? 404 : 100;
     },
   },
 });

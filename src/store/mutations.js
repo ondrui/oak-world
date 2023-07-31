@@ -118,9 +118,33 @@ export const setListAllCities = (state, { cities }) => {
  * @param state Текущее состояние store.state.
  * @param datasetsMap Данные для карточек на карте.
  */
-export const SET_MAP_DATA_SET = "setMapDataset";
+export const SET_MAP_DATA = "setMapDataset";
 export const setMapDataset = (state, { datasetsMap }) => {
   state.datasetsMap = datasetsMap;
+};
+/**
+ * Массив объектов с данными для карточек
+ * в секции "ИСТОРИЯ ПРОСМОТРОВ".
+ * @param state Текущее состояние store.state.
+ * @param datasetsMap Данные для карточек на карте.
+ */
+export const SET_HISTORY_DATA = "setHistoryDataset";
+// export const setHistoryDataset = (state, { datasetsHistory }) => {
+//   state.datasetsHistory = datasetsHistory;
+// };
+// for test
+export const setHistoryDataset = (state, { datasetsMap }) => {
+  state.datasetsMap = datasetsMap;
+};
+/**
+ * Массив объектов с данными для карточек
+ * в секции "ПОПУЛЯРНЫЕ ГОРОДА МИРА".
+ * @param state Текущее состояние store.state.
+ * @param datasetsMap Данные для карточек на карте.
+ */
+export const SET_POP_CITIES_DATA = "setPopCitiesData";
+export const setPopCitiesData = (state, { datasetsPop }) => {
+  state.datasetsPopCities = datasetsPop;
 };
 /**
  * Массив объектов с данными по наиболее крупным городам.
