@@ -4,7 +4,7 @@
       <h2 class="other-cities-title">
         <span>{{ getHistoryTitle[0] }}&nbsp;</span>{{ getHistoryTitle[1] }}
       </h2>
-      <DragScrolling class="other-cities-list" role="list">
+      <DragScrolling v-if="false" class="other-cities-list" role="list">
         <div
           v-for="item in cardMapData"
           :key="`c-${item.name_en}`"
@@ -13,6 +13,7 @@
           <CardCityGrid :itemDataset="item" />
         </div>
       </DragScrolling>
+      <TheSkeleton v-else />
     </div>
   </div>
 </template>

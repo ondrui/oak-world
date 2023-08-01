@@ -4,6 +4,7 @@ import TheSpinner from "./TheSpinner.vue";
 import LinkTo from "./LinkTo.vue";
 import BreadCrumbs from "./BreadCrumbs.vue";
 import SwitcherRadioBtn from "./SwitcherRadioBtn.vue";
+import TheSkeleton from "./TheSkeleton.vue";
 
 export default [
   BaseIcon,
@@ -12,4 +13,5 @@ export default [
   BreadCrumbs,
   TheSpinner,
   LinkTo,
+  TheSkeleton,
 ];

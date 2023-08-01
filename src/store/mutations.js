@@ -7,12 +7,15 @@
  * "ночь" (с 21:00 до 09:00).
  * @param forecast_3 Прогноз по 3 часа начиная с текущего часа.
  * @param fact Информация о фактической погоде.
+ * @param info Блок информации о населённом пункте.
  */
 export const SET_DATA_FORECAST = "setDataForecast";
 export const setDataForecast = (
   state,
-  { forecast_1, forecast_24, forecast_3, fact }
+  { forecast_1, forecast_24, forecast_3, fact, info }
 ) => {
+  //fact datasets
+  state.infoCity = info;
   //fact datasets
   state.datasetsFact = fact;
   /**
@@ -105,13 +108,40 @@ export const changeOpeningCard = (state, { index, card }) => {
   }
 };
 /**
- * Массив объектов с данными по всем городам.
+ * Объект со странами и городами.
  * @param state Текущее состояние store.state.
  * @param cities Массив с данными по городам.
  */
-export const SET_LIST_ALL_CITIES = "setListAllCities";
-export const setListAllCities = (state, { cities }) => {
-  state.listAllCities = cities;
+export const SET_LIST_COUNTRIES = "setListCountries";
+export const setListCountries = (state, { countries }) => {
+  state.listCountries = countries;
+};
+/**
+ * Массив объектов список популярных городов всех стран.
+ * @param state Текущее состояние store.state.
+ * @param cities Массив с данными по городам.
+ */
+export const SET_LIST_TOP_CITIES = "setListTopCities";
+export const setListTopCities = (state, { cities }) => {
+  state.listTopCities = cities;
+};
+/**
+ * Cписок регионов страны + популярные городы регионов.
+ * @param state Текущее состояние store.state.
+ * @param cities Массив с данными по городам.
+ */
+export const SET_LIST_REGIONS = "setListRegions";
+export const setListRegions = (state, { regions }) => {
+  state.listRegions = regions;
+};
+/**
+ * Список городов для выбранной страны и опционально выбранного региона.
+ * @param state Текущее состояние store.state.
+ * @param cities ??? с данными по городам.
+ */
+export const SET_LIST_CITIES = "setListCities";
+export const setListCities = (state, { cities }) => {
+  state.listCities = cities;
 };
 /**
  * Массив объектов с данными для карточек на карте.
@@ -145,15 +175,6 @@ export const setHistoryDataset = (state, { datasetsMap }) => {
 export const SET_POP_CITIES_DATA = "setPopCitiesData";
 export const setPopCitiesData = (state, { datasetsPop }) => {
   state.datasetsPopCities = datasetsPop;
-};
-/**
- * Массив объектов с данными по наиболее крупным городам.
- * @param state Текущее состояние store.state.
- * @param topCities Массив с данными по городам.
- */
-export const SET_LIST_TOP_CITIES = "setListTopCities";
-export const setListTopCities = (state, { topCities }) => {
-  state.listTopCities = topCities;
 };
 /**
  * Записываем в стор объект с переводами.

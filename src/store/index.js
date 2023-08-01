@@ -8,8 +8,8 @@ import {
   setDataAPI,
   CHANGE_OPENING_CARD,
   changeOpeningCard,
-  SET_LIST_ALL_CITIES,
-  setListAllCities,
+  SET_LIST_CITIES,
+  setListCities,
   SET_MAP_DATA,
   setMapDataset,
   SET_HISTORY_DATA,
@@ -18,6 +18,8 @@ import {
   setPopCitiesData,
   SET_LIST_TOP_CITIES,
   setListTopCities,
+  SET_LIST_REGIONS,
+  setListRegions,
   SET_CONSTANTS,
   setConstants,
   SET_CITY,
@@ -26,6 +28,8 @@ import {
   setLocale,
   SET_SUPPORTED_LOCALES,
   setSupportedLocales,
+  SET_LIST_COUNTRIES,
+  setListCountries,
   LOADING,
   loading,
   INIT_COMMIT,
@@ -93,6 +97,10 @@ export default new Vuex.Store({
      * Город для которого выводится прогноз погоды.
      */
     currentCity: null,
+    /**
+     * Блок информации о населённом пункте.
+     */
+    infoCity: null,
     /**
      * Лоадер.
      */
@@ -190,13 +198,21 @@ export default new Vuex.Store({
      */
     datasetsPopCities: [],
     /**
-     * Список всех городов Армении.
+     * Объект со странами и городами.
      */
-    listAllCities: [],
+    listCountries: null,
     /**
-     * Самые населенные города Армении.
+     * Массив объектов список популярных городов всех стран.
      */
     listTopCities: [],
+    /**
+     * Cписок регионов страны + популярные городы регионов.
+     */
+    listRegions: null,
+    /**
+     * Список городов для выбранной страны и опционально выбранного региона.
+     */
+    listCities: null,
   },
   getters: {
     /**
@@ -1112,7 +1128,7 @@ export default new Vuex.Store({
     },
     /**
      *
-     * Возвращает самые населенные города Армении.
+     * Возвращает список самых населенных городов с разбивкой по странам.
      * @param supportedLocales Массив с поддерживаемыми языками.
      * @param getLocale Текущий язык.
      */
@@ -1231,19 +1247,21 @@ export default new Vuex.Store({
       const strCity = localStorage.getItem("city");
       const city = JSON.parse(strCity);
 
-      console.log(props, defaultLocale, langLS, city);
-      return defaultCity;
+      console.log(props, defaultLocale, langLS, city, defaultCity);
+      return props;
     },
   },
   mutations: {
     [SET_DATA_FORECAST]: setDataForecast,
     [SET_DATA_API]: setDataAPI,
     [CHANGE_OPENING_CARD]: changeOpeningCard,
-    [SET_LIST_ALL_CITIES]: setListAllCities,
+    [SET_LIST_CITIES]: setListCities,
     [SET_MAP_DATA]: setMapDataset,
     [SET_HISTORY_DATA]: setHistoryDataset,
     [SET_POP_CITIES_DATA]: setPopCitiesData,
+    [SET_LIST_COUNTRIES]: setListCountries,
     [SET_LIST_TOP_CITIES]: setListTopCities,
+    [SET_LIST_REGIONS]: setListRegions,
     [SET_CONSTANTS]: setConstants,
     [SET_CITY]: setCity,
     [SET_LOCALE]: setLocale,
@@ -1306,8 +1324,24 @@ export default new Vuex.Store({
         console.error("Error! Could not load pop data section. " + error);
       }
     },
+    countriesList: async ({ commit }) => {
+      try {
+        const { data } = await axios.get("/country.json");
+        commit(SET_LIST_COUNTRIES, data);
+      } catch (error) {
+        console.error("Error! Could not load pop data section. " + error);
+      }
+    },
+    countryPage: async ({ commit }) => {
+      try {
+        const { data } = await axios.get("/countryList.json");
+        commit(SET_LIST_COUNTRIES, data);
+      } catch (error) {
+        console.error("Error! Could not load pop data section. " + error);
+      }
+    },
     /**
-     * Контролер загрузки данных для отображения
+     * Контролер загрузки данных для отображения компонент по выбранному роуту.
      * @param objectRouteProps Объект со свойствами роута (параметры, имя роута).
      */
     manageActions: async (
@@ -1319,11 +1353,33 @@ export default new Vuex.Store({
       await dispatch("loadSupportedLocales");
       await dispatch("loadSectionHistory");
 
+      // Если это не первоначальная загрузка приложения, то
+      // используем язык и город из параметров маршрута роутера.
+      if (state.isDataLoad) {
+        console.log("data already loaded manageActions");
+        commit(SET_LOCALE, objectRouteProps.langURL);
+        commit(SET_CITY, state.currentCity);
+        await dispatch("loadConstants");
+        return 200;
+      }
+
       window.first = {
-        page: "main",
+        page: "countries",
         lang: "default",
-        country: "",
+        lon: "37.6174943",
+        lat: "55.7504461",
+        country_en: "Russia",
+        country_ru: "Россия",
+        country_loc: "Россия",
+        area_en: "Moscow",
+        area_ru: "Москва",
+        area_loc: "Москва",
+        name_en: "Moscow__Central Administrative Okrug",
+        name_ru: "Москва__Центральный административный округ",
+        name_loc: "Москва__Центральный административный округ",
       };
+
+      const startData = window?.first;
       /**
        * Проверяем переменную window.warn при первом запуске приложения.
        * Если сервер не нашел данные по введенному URL.
@@ -1335,35 +1391,24 @@ export default new Vuex.Store({
        * При первоначальной загрузке приложения используем данные
        * из переменной window.first.
        */
-      if (window.first) {
-        getters.computedParamsURL(window.first);
-      }
+      getters.computedParamsURL(startData);
 
-      // Если это не первоначальная загрузка приложения, то
-      // используем язык и город из параметров маршрута роутера.
-      if (state.isDataLoad) {
-        console.log("data already loaded manageActions");
-        commit(SET_LOCALE, objectRouteProps.langURL);
-        commit(SET_CITY, state.currentCity);
-        await dispatch("loadConstants");
-        return 200;
-      }
-
-      const loadData = async (name) => {
+      const loadData = (name) => {
         const actions = {
           day: () => dispatch("daysForecast"),
           hourly: () => dispatch("hourlyForecast"),
           main: () => dispatch("hourlyForecast"),
           countries: () => dispatch("countriesList"),
           topWorldCities: () => dispatch("topWorldCities"),
-          country: () => dispatch("CountryPage"),
-          cities: () => dispatch("ListCities"),
+          country: () => dispatch("countryPage"),
+          cities: () => dispatch("listCities"),
         };
-        return await actions[name];
+        return actions[name];
       };
 
-      await loadData(objectRouteProps.nameURL);
+      await loadData(startData.page)();
       commit(INIT_COMMIT, true);
+      // commit(LOADING, false);
       return 200;
 
       // // Переменная с городом по умолчанию.
