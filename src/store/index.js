@@ -1365,7 +1365,20 @@ export default new Vuex.Store({
 
       window.first = {
         page: "countries",
-        lang: "default",
+        lang: "ru",
+        city: {
+          lon: 37.6174943,
+          lat: 55.7504461,
+          country_ru: "Россия",
+          country_en: "Russia",
+          country_loc: "Россия",
+          region_ru: "Москва",
+          region_en: "Moscow",
+          region_loc: "Москва",
+          name_ru: "Москва__Центральный административный округ",
+          name_en: "Moscow__Central Administrative Okrug",
+          name_loc: "Москва__Центральный административный округ",
+        },
         lon: "37.6174943",
         lat: "55.7504461",
         country_en: "Russia",
@@ -1387,11 +1400,6 @@ export default new Vuex.Store({
       if (window.warn && window.warn.err.length !== 0) {
         return 404;
       }
-      /**
-       * При первоначальной загрузке приложения используем данные
-       * из переменной window.first.
-       */
-      getters.computedParamsURL(startData);
 
       const loadData = (name) => {
         const actions = {
@@ -1407,8 +1415,17 @@ export default new Vuex.Store({
       };
 
       await loadData(startData.page)();
+      /**
+       * При первоначальной загрузке приложения используем данные
+       * из переменной window.first.
+       */
+      const paramsGetter = getters.computedParamsURL(startData);
+      commit(SET_LOCALE, paramsGetter.lang);
+      commit(SET_CITY, paramsGetter.city);
+      await dispatch("loadConstants");
       commit(INIT_COMMIT, true);
-      // commit(LOADING, false);
+      commit(LOADING, false);
+      console.log("finish action manager code 200");
       return 200;
 
       // // Переменная с городом по умолчанию.

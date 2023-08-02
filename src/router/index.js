@@ -10,7 +10,7 @@ import ListCities from "@/views/ListCities.vue";
 import WeatherInformer from "@/views/WeatherInformer.vue";
 import TabInformerDay from "@/views/TabInformerDay.vue";
 import TabInformerHourly from "@/views/TabInformerHourly.vue";
-import { LOADING } from "@/store/mutations";
+// import { LOADING } from "@/store/mutations";
 
 Vue.use(VueRouter);
 
@@ -176,7 +176,7 @@ router.beforeEach(async (to, from, next) => {
     });
   } else {
     console.log("exit hook beforEach router");
-    store.commit(LOADING, false);
+    // store.commit(LOADING, false);
     next();
   }
 });

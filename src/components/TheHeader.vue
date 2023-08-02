@@ -59,6 +59,7 @@ export default {
      * @param city Город для которого выводится прогноз погоды берется из стора.
      */
     pushNewURL(value, name) {
+      console.log("TheHeader call pushNewURL");
       const to = this.$router.resolve({
         name: name === "main" ? name : this.$route.name,
         params: {
